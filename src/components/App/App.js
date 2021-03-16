@@ -1,5 +1,6 @@
 import './App.sass';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Home from "../Home/Home";
 
 function App() {
   return (
@@ -8,6 +9,9 @@ function App() {
             <Switch>
                 <Route exact path='/'>
                     Hello World
+                </Route>
+                <Route exact path='/home'>
+                    <Home/>
                 </Route>
             </Switch>
         </Router>
