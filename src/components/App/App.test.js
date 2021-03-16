@@ -1,12 +1,19 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-// test if element exists
-test('renders Hello World', () => {
-  render(<App />);
-  const textElement = screen.getByText(/Hello World/i);
-  expect(textElement).toBeInTheDocument();
+
+test('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
 });
+
+// test if element exists
+// test('renders Hello World', () => {
+//   render(<App />);
+//   const textElement = screen.getByText(/Hello World/i);
+//   expect(textElement).toBeInTheDocument();
+// });
 
 // bolean test
 describe('true is truthy and false is falsy', () => {
