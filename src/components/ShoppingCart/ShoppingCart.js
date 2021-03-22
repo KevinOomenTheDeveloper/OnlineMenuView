@@ -9,10 +9,6 @@ import Col from "react-bootstrap/col";
 const ShoppingCart = () => {
     return (
         <div className="wrapper">
-
-            <Link to="/">
-                Back to hello world
-            </Link>
             <Container>
                 <div>
                     <hr></hr>
