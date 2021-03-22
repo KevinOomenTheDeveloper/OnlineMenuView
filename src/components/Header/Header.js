@@ -1,42 +1,63 @@
-import './Header.sass'
+import "./Header.sass";
 import PropTypes from "prop-types";
-import { Row }  from "react-bootstrap";
-import { AiOutlineLeft } from "react-icons/ai"
-import { HiOutlineCog } from "react-icons/hi"
-import {BsSearch} from 'react-icons/bs'
-import {FiShoppingCart} from "react-icons/all";
+import { Row, Nav, Navbar } from "react-bootstrap";
+import { AiOutlineLeft } from "react-icons/ai";
+import { HiOutlineCog } from "react-icons/hi";
+import { BsSearch } from "react-icons/bs";
+import { FiShoppingCart } from "react-icons/all";
 
-const Header = ({title}) => {
-    return (
-        <div>
-            <Row>
-                <div className="col-6">
-                    <Row>
-                        <div className="col-1">
-                            <AiOutlineLeft id="header-back-icon" size={30}/>
-                        </div>
-                        <div className="col-11">
-                            <h3> Title </h3>
-                        </div>
-                    </Row>
+import React from "react";
 
-                </div>
-                <div className="col-6">
-                    <BsSearch size={30} id="icon"/>
-                    <FiShoppingCart size={30}/>
-                    <HiOutlineCog id="icon" size={30}/>
-                </div>
-            </Row>
-        </div>
-    );
+const Header = ({ title }) => {
+  return (
+    <div>
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand href="#home">
+          {" "}
+          <AiOutlineLeft id="header-back-icon" size={30} />
+          {title}{" "}
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ml-auto">
+            <Nav.Link href="#search">
+              <BsSearch size={30} id="icon" />
+            </Nav.Link>
+            <Nav.Link href="#cart">
+              <FiShoppingCart size={30} />
+            </Nav.Link>
+            <Nav.Link href="#cog">
+              <HiOutlineCog id="icon" size={30} />
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
+  );
 };
 
-Header.defaultProps = {
-    title: 'Title'
-}
-
-Header.propTypes = {
-    title: PropTypes.string.isRequired
-}
+const Header1 = ({ title }) => {
+  return (
+    <div>
+      <Row>
+        <div className="col-6">
+          <Row>
+            <div className="col-2">
+              <AiOutlineLeft id="header-back-icon" size={30} />
+            </div>
+            <div className="col-10">
+              <h3> Title </h3>
+            </div>
+          </Row>
+        </div>
+        <div className="col-6">
+          <BsSearch size={30} id="icon" />
+          <FiShoppingCart size={30} />
+          <HiOutlineCog id="icon" size={30} />
+        </div>
+      </Row>
+    </div>
+  );
+};
 
 export default Header;
