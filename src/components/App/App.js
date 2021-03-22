@@ -5,6 +5,7 @@ import Example from "../Example/Example";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Layout from "../Layout/Layout";
+import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
@@ -20,6 +21,11 @@ function App() {
                 <Route exact path='/home'>
                     <Layout>
                         <Home/>
+                    </Layout>
+                </Route>
+                <Route exact path='/shoppingcart'>
+                    <Layout>
+                        <ShoppingCart/>
                     </Layout>
                 </Route>
                 <Route exact path='/header'>

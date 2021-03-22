@@ -4,7 +4,7 @@ import { Row, Nav, Navbar } from "react-bootstrap";
 import { AiOutlineLeft } from "react-icons/ai";
 import { HiOutlineCog } from "react-icons/hi";
 import { BsSearch } from "react-icons/bs";
-import { FiShoppingCart } from "react-icons/all";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 import React from "react";
 
@@ -24,7 +24,7 @@ const Header = ({ title }) => {
               <BsSearch size={30} id="icon" />
             </Nav.Link>
             <Nav.Link href="#cart">
-              <FiShoppingCart size={30} />
+              <AiOutlineShoppingCart size={30} />
             </Nav.Link>
             <Nav.Link href="#cog">
               <HiOutlineCog id="icon" size={30} />
