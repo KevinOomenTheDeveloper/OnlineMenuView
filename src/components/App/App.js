@@ -1,6 +1,8 @@
 import './App.sass';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "../Home/Home";
+import ShoppingCart from "../ShoppingCart/ShoppingCart";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -12,6 +14,9 @@ function App() {
                 </Route>
                 <Route exact path='/home'>
                     <Home/>
+                </Route>
+                <Route exact path='/shoppingcart'>
+                    <ShoppingCart/>
                 </Route>
             </Switch>
         </Router>
