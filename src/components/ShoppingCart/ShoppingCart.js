@@ -26,7 +26,7 @@ const ShoppingCart = () => {
                     </Row>
                     <Row>
                         <Col>
-                            <h4>Dit is soep met tomaten erin.</h4>
+                            <h5>Dit is soep met tomaten erin.</h5>
                         </Col>
                     </Row>
                 </div>
@@ -42,7 +42,7 @@ const ShoppingCart = () => {
                     </Row>
                     <Row>
                         <Col>
-                            <h4>Salade met sla.</h4>
+                            <h5>Salade met sla.</h5>
                         </Col>
                     </Row>
                 </div>
