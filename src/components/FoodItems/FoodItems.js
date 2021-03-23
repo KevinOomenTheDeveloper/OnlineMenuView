@@ -3,30 +3,30 @@ import Category from './Category'
 import { Col, Row } from 'react-bootstrap'
 import Container from "react-bootstrap/container";
 
-function FoodItems() {
+const FoodItems = () => {
     return (
         <div>
             Food items
             <Container>
                 <Row>
                     <Col xs={3}>
-                        <Category />
+                        <Category Name='Pasta' />
                     </Col>
                     <Col xs={6}>
-                        <Category />
+                        <Category Name='Vis' />
                     </Col>
                     <Col xs={3}>
                         <Category />
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={4}>
+                    <Col>
                         <Category />
                     </Col>
-                    <Col xs={4}>
+                    <Col>
                         <Category />
                     </Col>
-                    <Col xs={4}>
+                    <Col>
                         <Category />
                     </Col>
                 </Row>
