@@ -52,7 +52,7 @@ const Header1 = ({ title }) => {
         </div>
         <div className="col-6">
           <BsSearch size={30} id="icon" />
-          <FiShoppingCart size={30} />
+          <AiOutlineShoppingCart size={30} />
           <HiOutlineCog id="icon" size={30} />
         </div>
       </Row>
