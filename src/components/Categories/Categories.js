@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from 'react-bootstrap'
 
-const Category = ({ Name, ImageLink }) => {
+const Categories = ({ Name, ImageLink }) => {
     const imageClick = () => {
         alert(Name + ' CLICKED')
     }
@@ -18,4 +18,4 @@ const Category = ({ Name, ImageLink }) => {
     )
 }
 
-export default Category
+export default Categories
