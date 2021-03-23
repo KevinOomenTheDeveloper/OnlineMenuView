@@ -1,64 +1,17 @@
 import React from 'react';
 import "./ShoppingCart.sass"
-import {Link} from "react-router-dom";
 import Container from "react-bootstrap/container";
 import Row from "react-bootstrap/row";
 import Col from "react-bootstrap/col";
-import { useState} from "react";
+import ShoppingCartItem from "./ShoppingCartItem/ShoppingCartItem";
 
-const ShoppingCart = () => {
-
-    const [products, setItems] = useState([
-        {
-            id: 1,
-            name: 'Tomato Soup',
-            price: "4.00",
-            description: "This is soup made with tomatoes"
-        },
-        {
-            id: 2,
-            name: "Salad",
-            price: "3.00",
-            description: "Salad with dressing"
-        },
-        {
-            id: 3,
-            name: "Steak",
-            price: "6.00",
-            description: "Lorem Ipsum"
-        },
-        {
-            id: 4,
-            name: "Salad",
-            price: "3.00",
-            description: "Salad with dressing"
-        }
-    ])
+const ShoppingCart = ({products}) => {
 
     return (
         <div className="wrapper">
-
-            <Link to="/">
-                Back to hello world
-            </Link>
             <Container>
                 {products.map((product) => (
-                    <div>
-                        <hr/>
-                        <Row>
-                            <Col>
-                                <h4>{product.name}</h4>
-                            </Col>
-                            <Col className="price">
-                                <h4>{product.price}</h4>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <h5>{product.description}</h5>
-                            </Col>
-                        </Row>
-                    </div>
+                    <ShoppingCartItem product={product}/>
                 ))}
                 <div>
                     <hr/>
