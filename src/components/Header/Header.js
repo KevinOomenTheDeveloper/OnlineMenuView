@@ -2,7 +2,7 @@ import "./Header.sass";
 import PropTypes from "prop-types";
 import { Row, Nav, Navbar } from "react-bootstrap";
 import { AiOutlineLeft } from "react-icons/ai";
-import { HiOutlineCog } from "react-icons/hi";
+import { MdRestaurantMenu } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import {Link} from "react-router-dom";
@@ -32,7 +32,7 @@ const Header = ({ headerTitle }) => {
             </Nav.Link>
             <Nav.Link>
               <Link className="link" to="/home">
-                  <HiOutlineCog id="icon" size={30} />
+                  <MdRestaurantMenu id="icon" size={30} />
               </Link>
             </Nav.Link>
           </Nav>
@@ -59,7 +59,7 @@ const Header1 = ({ title }) => {
         <div className="col-6">
           <BsSearch size={30} id="icon" />
           <AiOutlineShoppingCart size={30} />
-          <HiOutlineCog id="icon" size={30} />
+          <MdRestaurantMenu id="icon" size={30} />
         </div>
       </Row>
     </div>
