@@ -30,12 +30,6 @@ function App() {
                         <ShoppingCart/>
                     </Layout>
                 </Route>
-                <Route exact path='/header'>
-                    <Header title="Pasta"/>
-                </Route>
-                <Route exact path='/footer'>
-                    <Footer/>
-                </Route>
             </Switch>
         </Router>
     </div>

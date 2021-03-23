@@ -5,6 +5,7 @@ import { AiOutlineLeft } from "react-icons/ai";
 import { HiOutlineCog } from "react-icons/hi";
 import { BsSearch } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import {Link} from "react-router-dom";
 
 import React from "react";
 
@@ -12,21 +13,27 @@ const Header = ({ headerTitle }) => {
   return (
     <div>
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">
-          {" "}
-          {headerTitle}{" "}
-        </Navbar.Brand>
+        <Link to="/">
+          <Navbar.Brand>
+            {" "}
+            {headerTitle}{" "}
+          </Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             <Nav.Link href="#search">
               <BsSearch size={30} id="icon" />
             </Nav.Link>
-            <Nav.Link href="/shoppingcart">
-              <AiOutlineShoppingCart size={30} />
+            <Nav.Link>
+              <Link className="link" to="/shoppingcart">
+                  <AiOutlineShoppingCart size={30} />
+              </Link>
             </Nav.Link>
-            <Nav.Link href="/home">
-              <HiOutlineCog id="icon" size={30} />
+            <Nav.Link>
+              <Link className="link" to="/home">
+                  <HiOutlineCog id="icon" size={30} />
+              </Link>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
