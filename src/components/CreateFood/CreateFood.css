@@ -1,17 +1,12 @@
 .productDetails {
-    height: 100%;
-    width: 50%;
+
     background-color: white;
     padding: 10px;
-    float: left;
 }
 
 .ingredientDetails {
-    height: 100%;
-    width: 50%;
     background-color: white;
     padding: 10px;
-    float: left;
 }
 
 .divButtons {
@@ -75,4 +70,8 @@
 .deleteBtn {
     float: left;
     margin: 0 0 0 5px;
+}
+
+#dropdown-basic-button {
+    
 }

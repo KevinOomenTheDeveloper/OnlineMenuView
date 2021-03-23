@@ -2,9 +2,6 @@ import ProductDetails from './ProductDetails';
 import ProductIngredients from './ProductIngredients'
 import React, { useState, useEffect } from 'react';
 import './CreateFood.css';
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/row";
-import Col from "react-bootstrap/col";
 
 export default function CreateFood() {
 
@@ -34,10 +31,8 @@ export default function CreateFood() {
 
         <div>
             <div className="container">
-            <Row>
-                <Col>< ProductDetails /></Col>
-                <Col>< ProductIngredients /></Col>
-              </Row>
+                < ProductDetails />
+                < ProductIngredients />
 
 
                 <div className="buttonContainer">
@@ -46,9 +41,6 @@ export default function CreateFood() {
                         <button type="button" className="btn btn-light">Cancel</button>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
 

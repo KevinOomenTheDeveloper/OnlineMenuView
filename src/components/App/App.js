@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Layout from "../Layout/Layout";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Categories from "../Categories/Categories";
-/*import "bootstrap/dist/css/bootstrap.min.css";*/
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import CreateFood from "../CreateFood/CreateFood";
 

@@ -1,5 +1,9 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState } from 'react';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button"
+import DropdownButton from "react-bootstrap/DropdownButton"
+import Dropdown from "react-bootstrap/Dropdown"
 
 
 export default function ProductDetails() {
@@ -38,54 +42,41 @@ export default function ProductDetails() {
     return (
         <>
             <div className="productDetails">
-                <form className="form-inline">
+                
+                <Form>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control type="text" placeholder="Name"   onChange={(e) => setText(e.target.value)}/>
 
-                    <div className="form-group mx-sm-3 mb-2">
-                        <label for="staticEmail2" className="sr-only">Name</label>
-                        <input type="text" className="form-control" id="inputPassword2" value={text} onChange={(e) => setText(e.target.value)}/>
-                    </div>
-                    <div className="form-group mx-sm-3 mb-2">
-                        <label for="inputPassword2" class="sr-only">Description</label>
-                        <textarea className="form-control" value={description} onChange={(e) => setDescription(e.target.value)}>
+                    </Form.Group>
 
-              </textarea>
-                    </div>
-
-
-                    <div className="form-group mx-sm-3 mb-2">
-                        <label for="inputPassword2" className="sr-only">Price</label>
-                        <input type="number" className="form-control" id="inputPassword2" value={price} onChange={(e) => setPrice(e.target.value)}/>
-                    </div>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Price</Form.Label>
+                        <Form.Control type="text" placeholder="Price" onChange={(e) => setText(e.target.value)} />
+                    </Form.Group>
 
 
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control as="textarea" rows={3}  onChange={(e) => setText(e.target.value)} />
+                    </Form.Group>
 
-                    <div className="form-group mx-sm-3 mb-2">
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                            <label className="form-check-label" for="flexCheckDefault">
-                                Vegan
-                            </label>
-                        </div>
-                        <div className="form-check">
-                            <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked"/>
-                            <label className="form-check-label" for="flexCheckChecked">
-                                Low in salt
-                            </label>
-                        </div>
-                    </div>
+                    
+                    <Form.Group controlId="formBasicCheckbox">
+                        <Form.Check type="checkbox" label="Vegan" />
+                        <Form.Check type="checkbox" label="Low in salt" />
+                    </Form.Group>
+                </Form>
 
 
-                    <div className="form-group mx-sm-3 mb-2" id="test">
-                        <label for="inputPassword2" className="sr-only">Category</label>
-                        <select className="form-control" id="category" name="category">
 
-                            {categorys.map(category => (
-                                <option value={category.value}>{category.value}</option>
-                            ))}
-                        </select>
-                    </div>
+                <select className="form-control" id="category" name="category">
+                    
+                    {categorys.map(category => (
+                            <option value={category.value}>{category.value}</option>
+                    ))}
+                </select>
 
-                </form>
 
             </div>
         </>
