@@ -15,16 +15,18 @@ function App() {
         <Router>
             <Switch>
                 <Route exact path='/'>
-                    Hello World
-                    <Example/>
+                    <Layout title="Start">
+                        Hello World
+                        <Example/>
+                    </Layout>
                 </Route>
                 <Route exact path='/home'>
-                    <Layout>
+                    <Layout title="Home">
                         <Home/>
                     </Layout>
                 </Route>
                 <Route exact path='/shoppingcart'>
-                    <Layout>
+                    <Layout title="Shopping cart">
                         <ShoppingCart/>
                     </Layout>
                 </Route>

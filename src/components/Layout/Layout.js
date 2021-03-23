@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 const Layout = (props) => {
     return (
         <div>
-            <Header/>
+            <Header headerTitle={props.title}/>
                 { props.children }
             <Footer/>
         </div>

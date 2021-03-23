@@ -8,14 +8,13 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 
 import React from "react";
 
-const Header = ({ title }) => {
+const Header = ({ headerTitle }) => {
   return (
     <div>
       <Navbar bg="light" expand="lg">
         <Navbar.Brand href="#home">
           {" "}
-          <AiOutlineLeft id="header-back-icon" size={30} />
-          {title}{" "}
+          {headerTitle}{" "}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -23,10 +22,10 @@ const Header = ({ title }) => {
             <Nav.Link href="#search">
               <BsSearch size={30} id="icon" />
             </Nav.Link>
-            <Nav.Link href="#cart">
+            <Nav.Link href="/shoppingcart">
               <AiOutlineShoppingCart size={30} />
             </Nav.Link>
-            <Nav.Link href="#cog">
+            <Nav.Link href="/home">
               <HiOutlineCog id="icon" size={30} />
             </Nav.Link>
           </Nav>
@@ -52,7 +51,7 @@ const Header1 = ({ title }) => {
         </div>
         <div className="col-6">
           <BsSearch size={30} id="icon" />
-          <FiShoppingCart size={30} />
+          <AiOutlineShoppingCart size={30} />
           <HiOutlineCog id="icon" size={30} />
         </div>
       </Row>
