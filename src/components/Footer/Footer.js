@@ -6,11 +6,13 @@ import {Link} from "react-router-dom";
 const Footer = () => {
     return (
         <div className="Footer">
-            <div className="footer-container">
-                <span>
-                     Footer
-                </span>
-            </div>
+            <Container>
+                <div className="footer-container">
+                    <span>
+                        Footer
+                    </span>
+                </div>
+            </Container>
         </div>
     );
 };
