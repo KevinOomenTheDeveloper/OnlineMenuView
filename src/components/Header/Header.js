@@ -7,25 +7,28 @@ import { BsSearch } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
 import React from "react";
+import {Link} from "react-router-dom";
 
 const Header = ({ headerTitle }) => {
   return (
     <div>
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">
-          {" "}
-          {headerTitle}{" "}
-        </Navbar.Brand>
+        <Link to="/">
+          <Navbar.Brand>
+            {headerTitle}
+          </Navbar.Brand>
+        </Link>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link href="#search">
+            <Nav.Link href="/search">
               <BsSearch size={30} id="icon" />
             </Nav.Link>
-            <Nav.Link href="/shoppingcart">
+            <Nav.Link href="/checkout">
               <AiOutlineShoppingCart size={30} />
             </Nav.Link>
-            <Nav.Link href="/home">
+            <Nav.Link href="/">
               <HiOutlineCog id="icon" size={30} />
             </Nav.Link>
           </Nav>
