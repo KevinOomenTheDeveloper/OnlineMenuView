@@ -31,7 +31,7 @@ const Header = ({ headerTitle }) => {
               </Link>
             </Nav.Link>
             <Nav.Link>
-              <Link className="link" to="/home">
+              <Link className="link" to="/categories">
                   <MdRestaurantMenu id="icon" size={30} />
               </Link>
             </Nav.Link>
