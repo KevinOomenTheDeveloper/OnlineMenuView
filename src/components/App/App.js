@@ -56,7 +56,7 @@ function App() {
                 </Route>
                 <Route exact path='/shoppingcart'>
                     <Layout title="Shopping cart">
-                        <ShoppingCart/>
+                        <ShoppingCart products={products}/>                    
                     </Layout>
                 </Route>
                 <Route exact path='/header'>
