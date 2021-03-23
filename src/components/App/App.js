@@ -2,8 +2,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Layout from "../Layout/Layout";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Categories from "../Categories/Categories";
-import "bootstrap/dist/css/bootstrap.min.css";
+/*import "bootstrap/dist/css/bootstrap.min.css";*/
 import { useState } from "react";
+import CreateFood from "../CreateFood/CreateFood";
 
 function App() {
 
@@ -51,6 +52,11 @@ function App() {
                     <Route exact path='/categories'>
                         <Layout title="CategoriesItem">
                             <Categories products={products} />
+                        </Layout>
+                    </Route>
+                    <Route exact path='/CreateFood'>
+                        <Layout title="CreateFood">
+                            <CreateFood />
                         </Layout>
                     </Route>
                 </Switch>
