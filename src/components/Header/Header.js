@@ -26,7 +26,7 @@ const Header = ({ headerTitle }) => {
               <BsSearch size={30} id="icon" />
             </Nav.Link>
             <Nav.Link>
-              <Link className="link" to="/shoppingcart">
+              <Link className="link" to="/checkout">
                   <AiOutlineShoppingCart size={30} />
               </Link>
             </Nav.Link>
