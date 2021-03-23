@@ -1,55 +1,26 @@
 import React from 'react';
 import "./ShoppingCart.sass"
-import {Link} from "react-router-dom";
 import Container from "react-bootstrap/container";
 import Row from "react-bootstrap/row";
 import Col from "react-bootstrap/col";
-//import "bootstrap";
+import ShoppingCartItem from "./ShoppingCartItem/ShoppingCartItem";
 
-const ShoppingCart = () => {
+const ShoppingCart = ({products}) => {
+
     return (
         <div className="wrapper">
             <Container>
+                {products.map((product) => (
+                    <ShoppingCartItem product={product}/>
+                ))}
                 <div>
-                    <hr></hr>
-                    <Row>
-                        <Col>
-                            <h4>TomatenSoep</h4>
-                        </Col>
-                        <Col className="price">
-                            <h4>4.00</h4>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <h5>Dit is soep met tomaten erin.</h5>
-                        </Col>
-                    </Row>
-                </div>
-                <div>
-                    <hr></hr>
-                    <Row>
-                        <Col>
-                            <h4>Salade</h4>
-                        </Col>
-                        <Col className="price">
-                            <h4>3.00</h4>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <h5>Salade met sla.</h5>
-                        </Col>
-                    </Row>
-                </div>
-                <div>
-                    <hr></hr>
+                    <hr/>
                     <Row>
                         <Col>
                             <h4>SubTotal</h4>
                         </Col>
                         <Col className="price">
-                            <h4>7.00</h4>
+                            <h4>{getPriceSum(products).toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Row>
@@ -65,7 +36,7 @@ const ShoppingCart = () => {
                             <h4>Total</h4>
                         </Col>
                         <Col className="price">
-                            <h4>7.00</h4>
+                            <h4>0.00</h4>
                         </Col>
                     </Row>
                 </div>
@@ -75,3 +46,11 @@ const ShoppingCart = () => {
 };
 
 export default ShoppingCart;
+
+function getPriceSum(products){
+    let total = 0;
+    for (let i = 0; i < products.length; i++){
+        total += parseFloat(products[i].price);
+    }
+    return total
+}
