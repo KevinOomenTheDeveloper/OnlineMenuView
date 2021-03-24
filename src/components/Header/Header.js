@@ -5,6 +5,7 @@ import { AiOutlineLeft } from "react-icons/ai";
 import { MdRestaurantMenu } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { CgAdd } from "react-icons/cg"
 import {Link} from "react-router-dom";
 
 import React from "react";
@@ -22,8 +23,10 @@ const Header = ({ headerTitle }) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link href="#search">
-              <BsSearch size={30} id="icon" />
+            <Nav.Link>
+              <Link className="link" to="/createfood">
+                <CgAdd size={30}/>
+              </Link>
             </Nav.Link>
             <Nav.Link>
               <Link className="link" to="/checkout">

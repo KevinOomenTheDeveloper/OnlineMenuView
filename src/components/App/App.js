@@ -54,7 +54,7 @@ function App() {
                             <Categories products={products} />
                         </Layout>
                     </Route>
-                    <Route exact path='/CreateFood'>
+                    <Route exact path='/createfood'>
                         <Layout title="CreateFood">
                             <CreateFood />
                         </Layout>
