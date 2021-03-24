@@ -2,12 +2,12 @@ import "./Header.sass";
 import PropTypes from "prop-types";
 import { Row, Nav, Navbar } from "react-bootstrap";
 import { AiOutlineLeft } from "react-icons/ai";
-import { HiOutlineCog } from "react-icons/hi";
+import { MdRestaurantMenu } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import {Link} from "react-router-dom";
 
 import React from "react";
-import {Link} from "react-router-dom";
 
 const Header = ({ headerTitle }) => {
   return (
@@ -15,21 +15,25 @@ const Header = ({ headerTitle }) => {
       <Navbar bg="light" expand="lg">
         <Link to="/">
           <Navbar.Brand>
-            {headerTitle}
+            {" "}
+            {headerTitle}{" "}
           </Navbar.Brand>
         </Link>
-
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link href="/search">
+            <Nav.Link href="#search">
               <BsSearch size={30} id="icon" />
             </Nav.Link>
-            <Nav.Link href="/checkout">
-              <AiOutlineShoppingCart size={30} />
+            <Nav.Link>
+              <Link className="link" to="/checkout">
+                  <AiOutlineShoppingCart size={30} />
+              </Link>
             </Nav.Link>
-            <Nav.Link href="/">
-              <HiOutlineCog id="icon" size={30} />
+            <Nav.Link>
+              <Link className="link" to="/categories">
+                  <MdRestaurantMenu id="icon" size={30} />
+              </Link>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -55,7 +59,7 @@ const Header1 = ({ title }) => {
         <div className="col-6">
           <BsSearch size={30} id="icon" />
           <AiOutlineShoppingCart size={30} />
-          <HiOutlineCog id="icon" size={30} />
+          <MdRestaurantMenu id="icon" size={30} />
         </div>
       </Row>
     </div>

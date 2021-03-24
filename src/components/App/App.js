@@ -40,7 +40,7 @@ function App() {
             <Router>
                 <Switch>
                     <Route exact path='/'>
-                        <Layout title="CategoriesItem">
+                        <Layout title="Categories">
                             <Categories products={products} />
                         </Layout>
                     </Route>
@@ -50,7 +50,7 @@ function App() {
                         </Layout>
                     </Route>
                     <Route exact path='/categories'>
-                        <Layout title="CategoriesItem">
+                        <Layout title="Categories">
                             <Categories products={products} />
                         </Layout>
                     </Route>
