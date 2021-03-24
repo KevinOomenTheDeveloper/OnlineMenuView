@@ -3,10 +3,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import './ShoppingCartItem.sass'
 
-const ShoppingCartItem = ({product}) => {
+const ShoppingCartItem = ({ product }) => {
     return (
         <div>
-            <hr/>
+            <hr />
             <Row>
                 <Col>
                     <h4>{product.name}</h4>

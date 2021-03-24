@@ -5,16 +5,16 @@ import Row from "react-bootstrap/row";
 import Col from "react-bootstrap/col";
 import ShoppingCartItem from "./ShoppingCartItem/ShoppingCartItem";
 
-const ShoppingCart = ({products}) => {
+const ShoppingCart = ({ products }) => {
 
     return (
         <div className="wrapper">
             <Container>
                 {products.map((product) => (
-                    <ShoppingCartItem product={product}/>
+                    <ShoppingCartItem product={product} />
                 ))}
                 <div>
-                    <hr/>
+                    <hr />
                     <Row>
                         <Col>
                             <h4>SubTotal</h4>
@@ -47,9 +47,9 @@ const ShoppingCart = ({products}) => {
 
 export default ShoppingCart;
 
-function getPriceSum(products){
+function getPriceSum(products) {
     let total = 0;
-    for (let i = 0; i < products.length; i++){
+    for (let i = 0; i < products.length; i++) {
         total += parseFloat(products[i].price);
     }
     return total
