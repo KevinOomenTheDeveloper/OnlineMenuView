@@ -4,6 +4,7 @@ import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Categories from "../Categories/Categories";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
+import CreateFood from "../CreateFood/CreateFood";
 
 function App() {
 
@@ -51,6 +52,11 @@ function App() {
                     <Route exact path='/categories'>
                         <Layout title="Categories">
                             <Categories products={products} />
+                        </Layout>
+                    </Route>
+                    <Route exact path='/CreateFood'>
+                        <Layout title="CreateFood">
+                            <CreateFood />
                         </Layout>
                     </Route>
                 </Switch>
