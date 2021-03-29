@@ -1,12 +1,11 @@
 import "./Header.sass";
-import PropTypes from "prop-types";
 import { Row, Nav, Navbar } from "react-bootstrap";
 import { AiOutlineLeft } from "react-icons/ai";
 import { MdRestaurantMenu } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { CgAdd } from "react-icons/cg"
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import React from "react";
 
@@ -25,17 +24,17 @@ const Header = ({ headerTitle }) => {
           <Nav className="ml-auto">
             <Nav.Link>
               <Link className="link" to="/createfood">
-                <CgAdd size={30}/>
+                <CgAdd size={30} />
               </Link>
             </Nav.Link>
             <Nav.Link>
               <Link className="link" to="/checkout">
-                  <AiOutlineShoppingCart size={30} />
+                <AiOutlineShoppingCart size={30} />
               </Link>
             </Nav.Link>
             <Nav.Link>
               <Link className="link" to="/categories">
-                  <MdRestaurantMenu id="icon" size={30} />
+                <MdRestaurantMenu id="icon" size={30} />
               </Link>
             </Nav.Link>
           </Nav>
