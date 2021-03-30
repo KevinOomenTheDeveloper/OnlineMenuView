@@ -5,6 +5,7 @@ import Categories from "../Categories/Categories";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import CreateFood from "../CreateFood/CreateFood";
+import DishesByCategory from "../DishesByCategory/DishesByCategory"
 
 function App() {
 
@@ -52,6 +53,11 @@ function App() {
                     <Route exact path='/categories'>
                         <Layout title="Categories">
                             <Categories products={products} />
+                        </Layout>
+                    </Route>
+                    <Route exact path='/dishesbycategory'>
+                        <Layout title="DishesByCategory">
+                            <DishesByCategory />
                         </Layout>
                     </Route>
                     <Route exact path='/createfood'>
