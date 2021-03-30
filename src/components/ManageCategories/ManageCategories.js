@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Form } from 'react-bootstrap'
+import { useForm } from "react-hook-form"
 
 function ManageCategories() {
+    const { register, handleSubmit } = useForm();
+
     const OnRemove = (categorieID) => {
         alert(`${categorieID} Removed`);
 
@@ -13,6 +16,20 @@ function ManageCategories() {
         }
 
         setCategories([...categories]);
+        console.log(categories)
+    }
+
+    const OnAdd = (props) => {
+        console.log(Math.max.apply(Math, categories.map(function (o) { return o.id } )) + 1);
+
+        setCategories(categories => [...categories, {
+            id: Math.max.apply(Math, categories.map(function (o) { return o.id })) + 1,
+            name: props.Name,
+            image: props.Url,
+        }]);
+
+        console.log(props);
+        console.log(categories);
     }
 
     const [categories, setCategories] = useState([
@@ -54,6 +71,26 @@ function ManageCategories() {
                                 </Col>
                             </Row>
                         ))}
+                    </Col>
+                    <Col>
+                        <Form onSubmit={handleSubmit(OnAdd)}>
+                            <Form.Group controlId="formBasicName">
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control type="text" placeholder="Name" name="Name" ref={register} />
+
+                            </Form.Group>
+
+                            <Form.Group controlId="formBasicUrl">
+                                <Form.Label>ImageLink</Form.Label>
+                                <Form.Control type="text" placeholder="https://site.nl/image" name="Url" ref={register} />
+                            </Form.Group>
+
+                            <div className="buttonContainer">
+                                <div className="divButtons">
+                                    <button type="submit" className="btn btn-primary" >Add</button>
+                                </div>
+                            </div>
+                        </Form>
                     </Col>
                 </Row>
             </Container>
