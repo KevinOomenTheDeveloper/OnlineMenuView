@@ -1,5 +1,6 @@
 import React from 'react'
-import { Image } from 'react-bootstrap'
+import { Card} from 'react-bootstrap'
+import "./Category.sass"
 
 const CategoriesItem = ({ Name, ImageLink }) => {
     const imageClick = () => {
@@ -7,15 +8,12 @@ const CategoriesItem = ({ Name, ImageLink }) => {
     }
 
     return (
-        <div>
-            <h6>{Name}</h6>
-            <Image
-                src={ImageLink}
-                fluid
-                onClick={imageClick}
-            />
-        </div>
-    )
+
+        <Card onClick={imageClick}>
+            <Card.Header>{Name}</Card.Header>
+            <Card.Img className='CardImage' src={ImageLink} />
+        </Card>
+    );
 }
 
 export default CategoriesItem
