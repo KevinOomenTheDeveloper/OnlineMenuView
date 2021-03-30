@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import CategoriesItem from './CategoriesItem'
-import { Col, Row } from 'react-bootstrap'
-import Container from "react-bootstrap/container";
+import { Col, Row, Container} from 'react-bootstrap'
 
 const Categories = () => {
     const [categories, setItems] = useState([

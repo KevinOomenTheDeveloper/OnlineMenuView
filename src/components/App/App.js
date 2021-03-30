@@ -3,8 +3,9 @@ import Layout from "../Layout/Layout";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Categories from "../Categories/Categories";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import CreateFood from "../CreateFood/CreateFood";
+import ManageCategories from "../ManageCategories/ManageCategories";
 
 function App() {
 
@@ -57,6 +58,11 @@ function App() {
                     <Route exact path='/createfood'>
                         <Layout title="CreateFood">
                             <CreateFood />
+                        </Layout>
+                    </Route>
+                    <Route exact path='/managecategories'>
+                        <Layout title='Manage Categories'>
+                            <ManageCategories />
                         </Layout>
                     </Route>
                 </Switch>
