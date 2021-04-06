@@ -20,7 +20,7 @@ const ShoppingCart = ({ products, tipTotal, setTipTotal }) => {
               <h4>SubTotal</h4>
             </Col>
             <Col className="price">
-              <h4>{getPriceSum(products, tipTotal).toFixed(2)}</h4>
+              <h4>{getPriceSubSum(products).toFixed(2)}</h4>
             </Col>
           </Row>
           <Row>
@@ -36,7 +36,7 @@ const ShoppingCart = ({ products, tipTotal, setTipTotal }) => {
               <h4>Total</h4>
             </Col>
             <Col className="price">
-              <h4>0.00</h4>
+              <h4>{getPriceSum(products, tipTotal).toFixed(2)}</h4>
             </Col>
           </Row>
         </div>
@@ -53,4 +53,12 @@ function getPriceSum(products, tipTotal) {
     total += parseFloat(products[i].price);
   }
   return total + Number(tipTotal);
+}
+
+function getPriceSubSum(products) {
+  let total = 0;
+  for (let i = 0; i < products.length; i++) {
+    total += parseFloat(products[i].price);
+  }
+  return total;
 }
