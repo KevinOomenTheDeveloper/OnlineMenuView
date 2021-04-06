@@ -16,20 +16,15 @@ function ManageCategories() {
         }
 
         setCategories([...categories]);
-        console.log(categories)
     }
 
     const OnAdd = (props) => {
-        console.log(Math.max.apply(Math, categories.map(function (o) { return o.id } )) + 1);
 
         setCategories(categories => [...categories, {
             id: Math.max.apply(Math, categories.map(function (o) { return o.id })) + 1,
             name: props.Name,
             image: props.Url,
         }]);
-
-        console.log(props);
-        console.log(categories);
     }
 
     const [categories, setCategories] = useState([
