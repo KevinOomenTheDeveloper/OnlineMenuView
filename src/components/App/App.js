@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import CreateFood from "../CreateFood/CreateFood";
 import ManageCategories from "../ManageCategories/ManageCategories";
+import DishesByCategory from "../DishesByCategory/DishesByCategory"
 
 function App() {
 
@@ -53,6 +54,11 @@ function App() {
                     <Route exact path='/categories'>
                         <Layout title="Categories">
                             <Categories products={products} />
+                        </Layout>
+                    </Route>
+                    <Route exact path='/dishesbycategory'>
+                        <Layout title="DishesByCategory">
+                            <DishesByCategory />
                         </Layout>
                     </Route>
                     <Route exact path='/createfood'>
