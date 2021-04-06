@@ -1,17 +1,28 @@
 import React from "react";
 import "./ShoppingCart.sass";
-import Container from "react-bootstrap/container";
-import Row from "react-bootstrap/row";
-import Col from "react-bootstrap/col";
+import { Row, Col, Container, Button } from "react-bootstrap";
 import ShoppingCartItem from "./ShoppingCartItem/ShoppingCartItem";
 import Tips from "./Tips/Tips";
 
-const ShoppingCart = ({ products, tipTotal, setTipTotal }) => {
+function getPriceSum(products, tipTotal) {
+  let total = 0;
+  for (let i = 0; i < products.length; i++) {
+    total += parseFloat(products[i].price);
+  }
+  return total + Number(tipTotal);
+}
+
+const ShoppingCart = ({ products, tipTotal, setTipTotal, deleteItem }) => {
   return (
     <div className="wrapper">
       <Container>
-        {products.map((product) => (
-          <ShoppingCartItem product={product} />
+        {products.map((product, idx) => (
+          <div>
+            <ShoppingCartItem product={product} />
+            <Button className="btn btn-danger" onClick={() => deleteItem(idx)}>
+              x
+            </Button>
+          </div>
         ))}
         <div>
           <hr />
@@ -46,11 +57,3 @@ const ShoppingCart = ({ products, tipTotal, setTipTotal }) => {
 };
 
 export default ShoppingCart;
-
-function getPriceSum(products, tipTotal) {
-  let total = 0;
-  for (let i = 0; i < products.length; i++) {
-    total += parseFloat(products[i].price);
-  }
-  return total + Number(tipTotal);
-}

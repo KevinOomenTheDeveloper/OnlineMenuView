@@ -37,6 +37,13 @@ function App() {
     },
   ]);
 
+  const deleteItem = (index) => {
+    alert(index);
+    var newList = products;
+    newList.splice(index, 1);
+    setItems([...newList]);
+  };
+
   return (
     <div className="App">
       <Router>
@@ -52,6 +59,7 @@ function App() {
                 products={products}
                 tipTotal={tipTotal}
                 setTipTotal={setTipTotal}
+                deleteItem={deleteItem}
               />
             </Layout>
           </Route>
