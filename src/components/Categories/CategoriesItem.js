@@ -1,18 +1,17 @@
 import React from 'react'
 import { Card} from 'react-bootstrap'
 import "./Category.sass"
+import { Link } from "react-router-dom";
 
-const CategoriesItem = ({ Name, ImageLink }) => {
-    const imageClick = () => {
-        alert(Name + ' CLICKED')
-    }
+const CategoriesItem = ({ Name, ImageLink}) => {
 
     return (
-
-        <Card onClick={imageClick}>
-            <Card.Header>{Name}</Card.Header>
-            <Card.Img className='CardImage' src={ImageLink} />
-        </Card>
+        <Link to="/dishesbycategory">
+            <Card>
+                <Card.Header>{Name}</Card.Header>
+                <Card.Img className='CardImage' src={ImageLink} />
+            </Card>
+        </Link>
     );
 }
 

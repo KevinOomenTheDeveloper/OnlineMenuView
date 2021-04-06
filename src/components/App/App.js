@@ -5,6 +5,7 @@ import Categories from "../Categories/Categories";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import CreateFood from "../CreateFood/CreateFood";
+import DishesByCategory from "../DishesByCategory/DishesByCategory"
 
 function App() {
   const [tipTotal, setTipTotal] = useState(0);
@@ -36,6 +37,7 @@ function App() {
     },
   ]);
 
+<<<<<<< HEAD
   return (
     <div className="App">
       <Router>
@@ -68,6 +70,41 @@ function App() {
       </Router>
     </div>
   );
+=======
+    return (
+        <div className="App">
+            <Router>
+                <Switch>
+                    <Route exact path='/'>
+                        <Layout title="Categories">
+                            <Categories products={products} />
+                        </Layout>
+                    </Route>
+                    <Route exact path='/checkout'>
+                        <Layout title="Shopping Cart">
+                            <ShoppingCart products={products} />
+                        </Layout>
+                    </Route>
+                    <Route exact path='/categories'>
+                        <Layout title="Categories">
+                            <Categories products={products} />
+                        </Layout>
+                    </Route>
+                    <Route exact path='/dishesbycategory'>
+                        <Layout title="DishesByCategory">
+                            <DishesByCategory />
+                        </Layout>
+                    </Route>
+                    <Route exact path='/createfood'>
+                        <Layout title="CreateFood">
+                            <CreateFood />
+                        </Layout>
+                    </Route>
+                </Switch>
+            </Router>
+        </div>
+    );
+>>>>>>> b649d0a2a03894c78562006dda8b72211e776c08
 }
 
 export default App;
