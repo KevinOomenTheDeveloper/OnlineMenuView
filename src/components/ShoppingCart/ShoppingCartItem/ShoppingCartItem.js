@@ -11,12 +11,15 @@ const ShoppingCartItem = ({ product, setItems }) => {
           <h4>{product.name}</h4>
         </Col>
         <Col className="price">
-          <h4>{product.price}</h4>
+          <h4>€{product.price}</h4>
         </Col>
       </Row>
       <Row>
         <Col sm={10}>
           <h5>{product.description}</h5>
+        </Col>
+        <Col className="quantity">
+          <h4>x{product.quantity}</h4>
         </Col>
       </Row>
     </div>

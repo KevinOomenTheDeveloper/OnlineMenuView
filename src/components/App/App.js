@@ -16,32 +16,44 @@ function App() {
       name: "Tomato Soup",
       price: "4.00",
       description: "This is soup made with tomatoes",
+      quantity: 1,
     },
     {
       id: 2,
       name: "Salad",
       price: "3.00",
       description: "Salad with dressing",
+      quantity: 1,
     },
     {
       id: 3,
       name: "Steak",
       price: "6.00",
       description: "Lorem Ipsum",
+      quantity: 1,
     },
     {
       id: 4,
       name: "Soup of the day",
       price: "3.50",
       description: "Ask the waiter for more information",
+      quantity: 1,
     },
   ]);
 
   const deleteItem = (index) => {
-    alert(index);
     var newList = products;
     newList.splice(index, 1);
     setItems([...newList]);
+  };
+
+  const updateQuantity = (index) => (e) => {
+    console.log("index: " + index);
+    console.log("property name: " + e.target.name);
+    let newArr = [...products];
+    newArr[index] = e.target.value;
+
+    setItems(newArr);
   };
 
   return (
@@ -60,6 +72,7 @@ function App() {
                 tipTotal={tipTotal}
                 setTipTotal={setTipTotal}
                 deleteItem={deleteItem}
+                updateQuantity={updateQuantity}
               />
             </Layout>
           </Route>

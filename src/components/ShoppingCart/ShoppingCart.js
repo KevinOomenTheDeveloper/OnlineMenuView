@@ -2,6 +2,7 @@ import React from "react";
 import "./ShoppingCart.sass";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import ShoppingCartItem from "./ShoppingCartItem/ShoppingCartItem";
+import Quantity from "./Quantity/Quantity";
 import Tips from "./Tips/Tips";
 
 function getPriceSum(products, tipTotal) {
@@ -12,7 +13,13 @@ function getPriceSum(products, tipTotal) {
   return total + Number(tipTotal);
 }
 
-const ShoppingCart = ({ products, tipTotal, setTipTotal, deleteItem }) => {
+const ShoppingCart = ({
+  products,
+  tipTotal,
+  setTipTotal,
+  deleteItem,
+  updateQuantity,
+}) => {
   return (
     <div className="wrapper">
       <Container>
@@ -22,6 +29,7 @@ const ShoppingCart = ({ products, tipTotal, setTipTotal, deleteItem }) => {
             <Button className="btn btn-danger" onClick={() => deleteItem(idx)}>
               x
             </Button>
+            <Quantity updateQuantity={updateQuantity(product, idx)}></Quantity>
           </div>
         ))}
         <div>
