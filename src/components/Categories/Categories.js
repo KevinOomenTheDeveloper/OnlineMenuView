@@ -5,13 +5,13 @@ import axios from "axios";
 
 const Categories = () => {
   // get all categories
-  const [categories, setItems] = useState([]);
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:9011/menu/categories")
       .then((res) => {
         console.log(res);
-        setCategories(res.data);
+        setCategories(res);
       })
       .catch((err) => {
         console.log(err);
@@ -19,7 +19,7 @@ const Categories = () => {
   });
 
   // get category by ID
-  const [category, setItems] = useState({});
+  const [category, setCategory] = useState({});
   const [id, setId] = useState(1);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Categories = () => {
       .get(`http://localhost:9011/menu/categories/${id}`)
       .then((res) => {
         console.log(res);
-        setItems(res.data);
+        setCategory(res);
       })
       .catch((err) => {
         console.log(err);
@@ -37,10 +37,10 @@ const Categories = () => {
   // create category
   useEffect(() => {
     axios
-      .post("http://localhost:9011/menu/categories/create", data)
+      .post("http://localhost:9011/menu/categories/create", category)
       .then((res) => {
         console.log(res);
-        console.log(data);
+        console.log(category);
       })
       .catch((err) => {
         console.log(err);
@@ -50,10 +50,10 @@ const Categories = () => {
   // update category
   useEffect(() => {
     axios
-      .put("http://localhost:9011/menu/categories/update", data)
+      .put("http://localhost:9011/menu/categories/update", category)
       .then((res) => {
         console.log(res);
-        console.log(data);
+        console.log(category);
       })
       .catch((err) => {
         console.log(err);
