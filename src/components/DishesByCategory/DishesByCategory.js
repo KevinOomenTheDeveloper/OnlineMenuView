@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DishItem from './DishItem';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Button } from 'react-bootstrap';
 import Container from "react-bootstrap/container";
 
 const DishesByCategory = () => {
@@ -31,16 +31,21 @@ const DishesByCategory = () => {
         }
     ]);
 
+    const clearClick = () => {
+        sessionStorage.clear();
+    }
+
     return (
         <div>
             <Container >
                 <Row>
-                {Dishes.map(Dish => (
-                    <Col className='Column' sm={4}>
-                        <DishItem Name={Dish.name} ImageLink={Dish.image} Description={Dish.description} />
+                {Dishes.map((Dish,i) => (
+                    <Col key={i} className='Column' sm={4}>
+                        <DishItem ID={Dish.id} Name={Dish.name} ImageLink={Dish.image} Description={Dish.description} />
                     </Col>
                 ))}
                 </Row>
+                <Button onClick={clearClick}>Clear session</Button>
             </Container>
         </div>
     )
