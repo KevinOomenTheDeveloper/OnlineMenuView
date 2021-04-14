@@ -6,32 +6,13 @@ const DishItem = ({ ID, Name, ImageLink, Description }) => {
     
     var [Amount, SetAmount] = useState(0);
     const plusButtonClick = e => {
-        SetAmount(Amount++);
+        SetAmount(++Amount);
         console.log(Amount);
         UpdateSession();
-       
-
-        //sessionStorage.setItem("ShoppingCardList","value");
-        /*if(){
-            sessionStorage.setItem("ShoppingCardList", ID);
-            alert(sessionStorage.getItem("ShoppingCardList"));
-        }else
-        {
-            var shoppingCardList = sessionStorage.getItem("ShoppingCardList") + "," + ID
-            sessionStorage.setItem("ShoppingCardList", shoppingCardList);
-            alert(sessionStorage.getItem("ShoppingCardList"));
-        }*/
-
-        /*var Data = { 
-            id: ID,
-            amount: 
-        }*/
-        
-        //alert(JSON.stringify(shoppingCartList));
     }
 
     const minusButtonClick = e => {
-        SetAmount(Amount--);
+        SetAmount(--Amount);
         UpdateSession();
     }
 
@@ -48,7 +29,6 @@ const DishItem = ({ ID, Name, ImageLink, Description }) => {
                 {
                     shoppingCartItem.amount = Amount;
                     alreadyExists = true;
-                    console.log(JSON.stringify(shoppingCartList));
                 }
             }
 
@@ -65,6 +45,10 @@ const DishItem = ({ ID, Name, ImageLink, Description }) => {
             shoppingCartList = [{id: ID, amount: 1}];
             console.log(JSON.stringify(shoppingCartList));
         }
+
+        shoppingCartList = shoppingCartList.filter(i => i.amount > 0);
+        
+        console.log(JSON.stringify(shoppingCartList));
         sessionStorage.setItem("ShoppingCartList", JSON.stringify(shoppingCartList));
     }
 
