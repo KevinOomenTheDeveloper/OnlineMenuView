@@ -22,21 +22,15 @@ const Header = ({ headerTitle }) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link>
-              <Link className="link" to="/createfood">
-                <CgAdd size={30} />
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link className="link" to="/checkout">
-                <AiOutlineShoppingCart size={30} />
-              </Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link className="link" to="/categories">
-                <MdRestaurantMenu id="icon" size={30} />
-              </Link>
-            </Nav.Link>
+            <Link className="link" to="/createfood">
+              <CgAdd size={30} />
+            </Link>
+            <Link className="link" to="/checkout">
+              <AiOutlineShoppingCart size={30} />
+            </Link>
+            <Link className="link" to="/categories">
+              <MdRestaurantMenu id="icon" size={30} />
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
