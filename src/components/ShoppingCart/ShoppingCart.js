@@ -8,7 +8,7 @@ import Tips from "./Tips/Tips";
 
 const ShoppingCart = ({ products, tipTotal, setTipTotal }) => {
   return (
-    <div className="wrapper">
+    <div className="shoppingcart-wrapper">
       <Container>
         {products.map((product) => (
           <ShoppingCartItem product={product} />
