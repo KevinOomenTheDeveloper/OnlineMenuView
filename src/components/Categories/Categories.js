@@ -4,6 +4,7 @@ import { Col, Row, Container } from "react-bootstrap";
 import axios from "axios";
 
 const Categories = () => {
+
   const [categories1, setItems] = useState([
     {
       id: 1,
