@@ -2,7 +2,6 @@ import ProductDetails from './ProductDetails';
 import ProductIngredients from './ProductIngredients'
 import React, {useState, useEffect} from 'react';
 import './CreateFood.css';
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/row";
 import Col from "react-bootstrap/col";
 
