@@ -10,6 +10,7 @@ const Tips = ({ setTipTotal }) => {
         title="Tips"
         onSelect={setTipTotal}
       >
+        <Dropdown.Item eventKey={0}>€0</Dropdown.Item>
         <Dropdown.Item eventKey={1}>€1</Dropdown.Item>
         <Dropdown.Item eventKey={2}>€2</Dropdown.Item>
         <Dropdown.Item eventKey={3}>€3</Dropdown.Item>
