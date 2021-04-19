@@ -6,7 +6,7 @@ import './ShoppingCartItem.sass'
 const ShoppingCartItem = ({ product }) => {
     return (
         <div>
-            <hr />
+            <hr className="shoppingcartitem-hr"/>
             <Row>
                 <Col>
                     <h4>{product.name}</h4>

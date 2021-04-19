@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import CategoriesItem from "./CategoriesItem";
 import {Col, Row, Container} from "react-bootstrap";
 import axios from "axios";
+import "./Category.sass"
 
 const Categories = () => {
 
@@ -92,7 +93,7 @@ const Categories = () => {
         <Container>
             <Row>
                 {categories1.map((categorie) => (
-                    <Col className="Column" sm={4}>
+                    <Col className="categories-column" sm={4}>
                         <CategoriesItem
                             Name={categorie.name}
                             ImageLink={categorie.image}
@@ -101,6 +102,7 @@ const Categories = () => {
                 ))}
             </Row>
         </Container>
+
     );
 };
 

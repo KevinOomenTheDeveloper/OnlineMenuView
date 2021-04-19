@@ -11,7 +11,7 @@ import React from "react";
 
 const Header = ({ headerTitle }) => {
   return (
-    <div>
+    <div className="header-wrapper">
       <Navbar bg="light" expand="lg">
         <Link to="/">
           <Navbar.Brand>
