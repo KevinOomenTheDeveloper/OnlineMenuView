@@ -25,7 +25,7 @@ const DishItem = ({ ID, Name, ImageLink, Description }) => {
         {
             for(var shoppingCartItem of shoppingCartList)
             {
-                if(shoppingCartItem.id == ID)
+                if(shoppingCartItem.id === ID)
                 {
                     shoppingCartItem.amount = Amount;
                     alreadyExists = true;
@@ -59,10 +59,11 @@ const DishItem = ({ ID, Name, ImageLink, Description }) => {
             <Card.Img className='card-image' src={ImageLink} />
             <Card.Body className="card-body">
                 <Card.Text>{Description}</Card.Text>
-                {Amount != "0" && <Button className="minus-button"  onClick={minusButtonClick}>-</Button>}
+                {Amount !== "0" && <Button className="minus-button" onClick={minusButtonClick}>-</Button>}
                 <Card.Text className="dish-amount">{Amount}</Card.Text>
                 <Button className="plus-button" onClick={plusButtonClick}>+</Button>
             </Card.Body>
+
         </Card>
     );
 }
