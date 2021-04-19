@@ -4,8 +4,6 @@ import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Categories from "../Categories/Categories";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState} from "react";
-import CreateFood from "../CreateFood/CreateFood";
-import ManageCategories from "../ManageCategories/ManageCategories";
 import DishesByCategory from "../DishesByCategory/DishesByCategory"
 import "./App.sass"
 
@@ -64,16 +62,6 @@ function App() {
                 <Route exact path='/dishesbycategory'>
                     <Layout title="DishesByCategory">
                         <DishesByCategory/>
-                    </Layout>
-                </Route>
-                <Route exact path='/createfood'>
-                    <Layout title="CreateFood">
-                        <CreateFood/>
-                    </Layout>
-                </Route>
-                <Route exact path='/managecategories'>
-                    <Layout title='Manage Categories'>
-                        <ManageCategories/>
                     </Layout>
                 </Route>
             </Switch>
