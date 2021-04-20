@@ -98,6 +98,7 @@ const DishesByCategory = () => {
                 {Dishes.map((Dish) => (
                     <Col className="dishesByCategory-column" sm={4}>
                         <DishItem
+                            dishID = {Dish.id}
                             Name={Dish.name}
                             ImageLink={Dish.image}
                             Description={Dish.description}
