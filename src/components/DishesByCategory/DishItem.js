@@ -39,11 +39,13 @@ const DishItem = ({ ID, Name, ImageLink, Description }) => {
                 console.log(JSON.stringify(shoppingCartList));
             }
         }
-
-        if(!alreadyExists)
+        else
         {
-            shoppingCartList = [{id: ID, amount: 1}];
-            console.log(JSON.stringify(shoppingCartList));
+            if(!alreadyExists)
+            {
+                shoppingCartList = [{id: ID, amount: 1}];
+                console.log(JSON.stringify(shoppingCartList));
+            }
         }
 
         shoppingCartList = shoppingCartList.filter(i => i.amount > 0);
