@@ -36,62 +36,6 @@ const DishesByCategory = () => {
         },
     ]);
 
-    // get all Dishes
-    const [dishByCategories, setDishByCategories] = useState([]);
-    useEffect(() => {
-        axios
-            .get("http://localhost:9011/menu/categories")
-            .then((res) => {
-                console.log(res);
-                setDishByCategory(res);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    });
-
-    // get dish by ID
-    const [dishByCategory, setDishByCategory] = useState({});
-    const [id, setId] = useState(1);
-
-    useEffect(() => {
-        axios
-            .get(`http://localhost:9011/menu/dishes/${id}`)
-            .then((res) => {
-                console.log(res);
-                setDishByCategory(res);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    });
-
-    // create dish
-    useEffect(() => {
-        axios
-            .post("http://localhost:9011/menu/dishes/create", dishByCategory)
-            .then((res) => {
-                console.log(res);
-                console.log(dishByCategory);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    });
-
-    // update dish
-    useEffect(() => {
-        axios
-            .put("http://localhost:9011/menu/dishes/update", dishByCategory)
-            .then((res) => {
-                console.log(res);
-                console.log(dishByCategory);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    });
-
     return (
         <Container>
             <Row>
