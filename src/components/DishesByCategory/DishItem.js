@@ -4,6 +4,7 @@ import "./DishesByCategory.sass"
 
 const DishItem = ({ dishID, Name, ImageLink, Description }) => {
 
+    console.log(dishID)
     const [amount, setAmount] = useState(0);
     const [ID, setID] = useState(dishID);
     const plusButtonClick = e => {
@@ -36,7 +37,6 @@ const DishItem = ({ dishID, Name, ImageLink, Description }) => {
             {
                 shoppingCartList.push({id: ID, amount: 1});
                 alreadyExists = true;
-                console.log(JSON.stringify(shoppingCartList));
             }
         }
 
@@ -51,7 +51,6 @@ const DishItem = ({ dishID, Name, ImageLink, Description }) => {
 
         shoppingCartList = shoppingCartList.filter(i => i.amount > 0);
 
-        console.log(JSON.stringify(shoppingCartList));
         sessionStorage.setItem("ShoppingCartList", JSON.stringify(shoppingCartList));
     }
 

@@ -26,7 +26,12 @@ const DishesByCategory = () => {
                 console.log(result)
                 return result.data;
             }
-            fetchCategoryByName().then(r => setDishes(r))
+            fetchCategoryByName().then(r => setDishes(r)).then( r => {
+                    console.log("logging dishes");
+                    console.log(dishes);
+            }
+
+            )
         })
     }, []);
 
@@ -38,7 +43,7 @@ const DishesByCategory = () => {
                 {dishes.map((Dish) => (
                     <Col className="dishesByCategory-column" sm={4}>
                         <DishItem
-                            dishID = {Dish.id}
+                            dishID = {Dish.dishId}
                             Name={Dish.name}
                             ImageLink={Dish.imageUrl}
                             Description={Dish.description}
