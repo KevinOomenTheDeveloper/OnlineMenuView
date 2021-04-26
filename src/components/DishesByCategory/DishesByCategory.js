@@ -14,13 +14,16 @@ const DishesByCategory = () => {
 
        useEffect(() => {
         const fetchCategoryByName = async () => {
-            const result = await axios(CATEGORY_BY_NAME + categoryName);
+            const result = await axios(CATEGORY_BY_NAME + "Vis");
+            console.log(result)
+            console.log(result.data)
             return result.data;
         }
         fetchCategoryByName().then(r =>
         {
             const fetchCategoryByName = async () => {
                 const result = await axios(DISHES_BY_CATEGORYID + r.categoryId);
+                console.log(result)
                 return result.data;
             }
             fetchCategoryByName().then(r => setDishes(r))

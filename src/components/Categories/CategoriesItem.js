@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const CategoriesItem = ({ Name, ImageLink}) => {
 
-    const link = "/category/" + Name.toLowerCase();
+    const link = "/category/" + Name;
 
     return (
         <div className="categoriesItem-wrapper">
