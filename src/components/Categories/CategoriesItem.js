@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 
 const CategoriesItem = ({ Name, ImageLink}) => {
 
+    const link = "/category/" + Name.toLowerCase();
+
     return (
         <div className="categoriesItem-wrapper">
-            <Link to="/dishesbycategory">
+            <Link to={link}>
                 <Card>
                     <Card.Header>{Name}</Card.Header>
                     <Card.Img className='categoryItem-CardImage' src={ImageLink} />
