@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import "./ShoppingCart.sass";
 import Container from "react-bootstrap/container";
 import Row from "react-bootstrap/row";
