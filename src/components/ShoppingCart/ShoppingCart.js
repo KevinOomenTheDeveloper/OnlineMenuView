@@ -4,47 +4,17 @@ import Container from "react-bootstrap/container";
 import Row from "react-bootstrap/row";
 import Col from "react-bootstrap/col";
 import ShoppingCartItem from "./ShoppingCartItem/ShoppingCartItem";
-import Button from "react-bootstrap/Button";
 import Tips from "./Tips/Tips";
-import axios from "axios";
 
-const ShoppingCart = ({products}) => {
-    const initialState = {
-        id: null,
-        orderId: null,
-        dateTime: "",
-        tableId: null,
-        tip: null,
-        totalPrice: null,
-    };
-    const [tipTotal, setTipTotal] = useState(0);
-    const [order, setOrder] = useState(initialState);
-    const [submitted, setSubmitted] = useState(false);
-
-    const handleInputChange = (event) => {
-        const {name, value} = event.target;
-        setOrder({...order, [name]: value});
-    };
-
-    const saveOrder = () => {
-        var data = {
-            tip: 1.00,
-            totalPrice: 10.00,
-        };
-
-        axios.post("http://localhost:9191/orders/create", data).then(r => console.log(r));
-
-
-    };
-
+const ShoppingCart = ({ products, tipTotal, setTipTotal }) => {
     return (
         <div className="shoppingcart-wrapper">
             <Container>
                 {products.map((product) => (
-                    <ShoppingCartItem product={product}/>
+                    <ShoppingCartItem product={product} />
                 ))}
                 <div>
-                    <hr/>
+                    <hr />
                     <Row>
                         <Col>
                             <h4>SubTotal</h4>
@@ -69,9 +39,6 @@ const ShoppingCart = ({products}) => {
                             <h4>{getPriceSum(products, tipTotal).toFixed(2)}</h4>
                         </Col>
                     </Row>
-                    <Button className="orderButton" onClick={saveOrder}>
-                        Order!
-                    </Button>
                 </div>
             </Container>
         </div>
