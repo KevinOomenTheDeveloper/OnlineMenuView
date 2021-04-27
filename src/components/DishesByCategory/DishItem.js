@@ -4,7 +4,6 @@ import "./DishesByCategory.sass"
 
 const DishItem = ({ dishID, Name, ImageLink, Description }) => {
 
-    console.log(dishID)
     const [amount, setAmount] = useState(0);
     const [ID, setID] = useState(dishID);
     const plusButtonClick = e => {
@@ -45,7 +44,6 @@ const DishItem = ({ dishID, Name, ImageLink, Description }) => {
             if(!alreadyExists)
             {
                 shoppingCartList = [{id: ID, amount: 1}];
-                console.log(JSON.stringify(shoppingCartList));
             }
         }
 
