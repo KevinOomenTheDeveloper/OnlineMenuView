@@ -4,7 +4,7 @@ import {Col, Row, Container} from "react-bootstrap";
 import axios from "axios";
 import "./Category.sass"
 
-const CATEGORIES_API_REST_URL = "http://localhost:9191/menu/categories/all";
+const ALL_CATEGORIES = "http://localhost:9191/menu/categories/all";
 
 
 const Categories = () => {
@@ -13,7 +13,7 @@ const Categories = () => {
     const [categories, setCategories] = useState([]);
     useEffect(() => {
         const fetchCategories = async () => {
-            const result = await axios(CATEGORIES_API_REST_URL);
+            const result = await axios(ALL_CATEGORIES);
             console.log(result.data)
             return result.data;
         }
