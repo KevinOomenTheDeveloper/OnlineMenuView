@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import "./ShoppingCart.sass";
 import Container from "react-bootstrap/container";
 import Row from "react-bootstrap/row";
@@ -32,15 +32,8 @@ const ShoppingCart = ({products}) => {
             totalPrice: 10.00,
         };
 
-        const save = async () => {
-            try {
-                const result = await axios.post("http://localhost:9191/orders/create", data);
-                console.log(result.data);
-            } catch (err) {
-                console.error(err);
-            }
-        }
-        save().then(r => console.log(r));
+        axios.post("http://localhost:9191/orders/create", data).then(r => console.log(r));
+
 
     };
 
