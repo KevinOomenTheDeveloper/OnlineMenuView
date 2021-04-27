@@ -4,47 +4,30 @@ import {Col, Row, Container} from "react-bootstrap";
 import axios from "axios";
 import "./Category.sass"
 
+const ALL_CATEGORIES = "http://localhost:9191/menu/categories/all";
+
+
 const Categories = () => {
 
-    const [categories1, setItems] = useState([
-        {
-            id: 1,
-            name: "Pasta",
-            image:
-                "https://media.discordapp.net/attachments/826071766807216128/826072364059852800/Z.png",
-        },
-        {
-            id: 2,
-            name: "Vlees",
-            image:
-                "https://media.discordapp.net/attachments/826071766807216128/826071810126381116/9k.png",
-        },
-        {
-            id: 3,
-            name: "Vis",
-            image:
-                "https://media.discordapp.net/attachments/826071766807216128/826072466295619604/9k.png",
-        },
-        {
-            id: 4,
-            name: "Soep",
-            image:
-                "https://media.discordapp.net/attachments/826071766807216128/826072533803204628/Z.png",
-        },
-    ]);
-
-    // get category by ID
-    const [category, setCategory] = useState({});
-    const [id, setId] = useState(1);
+    // get all categories
+    const [categories, setCategories] = useState([]);
+    useEffect(() => {
+        const fetchCategories = async () => {
+            const result = await axios(ALL_CATEGORIES);
+            console.log(result.data)
+            return result.data;
+        }
+        fetchCategories().then(r => setCategories(r));
+    }, []);
 
     return (
         <Container>
             <Row>
-                {categories1.map((categorie) => (
+                {categories.map((category) => (
                     <Col className="categories-column" sm={4}>
                         <CategoriesItem
-                            Name={categorie.name}
-                            ImageLink={categorie.image}
+                            Name={category.name}
+                            ImageLink={category.imageUrl}
                         />
                     </Col>
                 ))}

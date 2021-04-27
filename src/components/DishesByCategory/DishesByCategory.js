@@ -4,46 +4,48 @@ import {Col, Row} from "react-bootstrap";
 import Container from "react-bootstrap/container";
 import axios from "axios";
 
+const CATEGORY_BY_NAME = "http://localhost:9191/menu/categories/name/";
+const DISHES_BY_CATEGORYID = "http://localhost:9191/menu/dishes/category/";
+
 const DishesByCategory = () => {
-    const [Dishes] = useState([
+
+    const categoryName = window.location.pathname.split("/").pop()
+    const [dishes, setDishes] = useState([]);
+
+       useEffect(() => {
+        const fetchCategoryByName = async () => {
+            const result = await axios(CATEGORY_BY_NAME + "Vis");
+            console.log(result)
+            console.log(result.data)
+            return result.data;
+        }
+        fetchCategoryByName().then(r =>
         {
-            id: 1,
-            name: "normale Pasta",
-            image:
-                "https://media.discordapp.net/attachments/826071766807216128/826072364059852800/Z.png",
-            description: "Dit is normale pasta",
-        },
-        {
-            id: 2,
-            name: "warme Pasta",
-            image:
-                "https://media.discordapp.net/attachments/826071766807216128/826072364059852800/Z.png",
-            description: "Dit is warme pasta",
-        },
-        {
-            id: 3,
-            name: "koude Pasta",
-            image:
-                "https://media.discordapp.net/attachments/826071766807216128/826072364059852800/Z.png",
-            description: "Dit is koude pasta",
-        },
-        {
-            id: 4,
-            name: "quantum Pasta",
-            image:
-                "https://media.discordapp.net/attachments/826071766807216128/826072364059852800/Z.png",
-            description: "Dit is quantum pasta",
-        },
-    ]);
+            const fetchCategoryByName = async () => {
+                const result = await axios(DISHES_BY_CATEGORYID + r.categoryId);
+                console.log(result)
+                return result.data;
+            }
+            fetchCategoryByName().then(r => setDishes(r)).then( r => {
+                    console.log("logging dishes");
+                    console.log(dishes);
+            }
+
+            )
+        })
+    }, []);
+
+
 
     return (
         <Container>
             <Row>
-                {Dishes.map((Dish) => (
+                {dishes.map((Dish) => (
                     <Col className="dishesByCategory-column" sm={4}>
                         <DishItem
+                            dishID = {Dish.dishId}
                             Name={Dish.name}
-                            ImageLink={Dish.image}
+                            ImageLink={Dish.imageUrl}
                             Description={Dish.description}
                         />
                     </Col>

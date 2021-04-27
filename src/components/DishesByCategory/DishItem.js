@@ -2,32 +2,33 @@ import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import "./DishesByCategory.sass"
 
-const DishItem = ({ ID, Name, ImageLink, Description }) => {
-    
-    var [Amount, SetAmount] = useState(0);
+const DishItem = ({ dishID, Name, ImageLink, Description }) => {
+
+    console.log(dishID)
+    const [amount, setAmount] = useState(0);
+    const [ID, setID] = useState(dishID);
     const plusButtonClick = e => {
-        SetAmount(++Amount);
-        console.log(Amount);
+        setAmount(amount + 1);
         UpdateSession();
     }
 
     const minusButtonClick = e => {
-        SetAmount(--Amount);
+        setAmount(amount - 1);
         UpdateSession();
     }
 
     function UpdateSession()
-    { 
-        var shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
+    {
+        let shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
         var alreadyExists = false;
-        
+
         if(shoppingCartList != null)
         {
             for(var shoppingCartItem of shoppingCartList)
             {
                 if(shoppingCartItem.id === ID)
                 {
-                    shoppingCartItem.amount = Amount;
+                    shoppingCartItem.amount = amount;
                     alreadyExists = true;
                 }
             }
@@ -36,19 +37,20 @@ const DishItem = ({ ID, Name, ImageLink, Description }) => {
             {
                 shoppingCartList.push({id: ID, amount: 1});
                 alreadyExists = true;
+            }
+        }
+
+        else
+        {
+            if(!alreadyExists)
+            {
+                shoppingCartList = [{id: ID, amount: 1}];
                 console.log(JSON.stringify(shoppingCartList));
             }
         }
 
-        if(!alreadyExists)
-        {
-            shoppingCartList = [{id: ID, amount: 1}];
-            console.log(JSON.stringify(shoppingCartList));
-        }
-
         shoppingCartList = shoppingCartList.filter(i => i.amount > 0);
-        
-        console.log(JSON.stringify(shoppingCartList));
+
         sessionStorage.setItem("ShoppingCartList", JSON.stringify(shoppingCartList));
     }
 
@@ -59,11 +61,10 @@ const DishItem = ({ ID, Name, ImageLink, Description }) => {
             <Card.Img className='card-image' src={ImageLink} />
             <Card.Body className="card-body">
                 <Card.Text>{Description}</Card.Text>
-                {Amount !== "0" && <Button className="minus-button" onClick={minusButtonClick}>-</Button>}
-                <Card.Text className="dish-amount">{Amount}</Card.Text>
+                {amount != "0" && <Button className="minus-button"  onClick={minusButtonClick}>-</Button>}
+                <Card.Text className="dish-amount">{amount}</Card.Text>
                 <Button className="plus-button" onClick={plusButtonClick}>+</Button>
             </Card.Body>
-
         </Card>
     );
 }
