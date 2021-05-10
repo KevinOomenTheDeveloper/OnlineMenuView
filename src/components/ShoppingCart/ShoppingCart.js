@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./ShoppingCart.sass";
 import Container from "react-bootstrap/container";
 import Row from "react-bootstrap/row";
@@ -6,8 +6,29 @@ import Col from "react-bootstrap/col";
 import ShoppingCartItem from "./ShoppingCartItem/ShoppingCartItem";
 import Tips from "./Tips/Tips";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 
 const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
+
+    const saveOrder = () => {
+
+
+        async function onUseEffect() {
+
+            const headers = {
+                'Content-Type': 'text/plain'
+            };
+
+            await axios.post(
+                'http://localhost:9191/orders/create',
+                {headers}
+            ).then(response => {
+                console.log("Success ========>", response);
+            })
+        }
+        onUseEffect().then()
+    }
+
     return (
         <div className="shoppingcart-wrapper">
             <Container>
