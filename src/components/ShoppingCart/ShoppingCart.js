@@ -5,16 +5,17 @@ import Row from "react-bootstrap/row";
 import Col from "react-bootstrap/col";
 import ShoppingCartItem from "./ShoppingCartItem/ShoppingCartItem";
 import Tips from "./Tips/Tips";
+import Button from "react-bootstrap/Button";
 
-const ShoppingCart = ({ products, tipTotal, setTipTotal }) => {
+const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
     return (
         <div className="shoppingcart-wrapper">
             <Container>
                 {products.map((product) => (
-                    <ShoppingCartItem product={product} />
+                    <ShoppingCartItem product={product}/>
                 ))}
                 <div>
-                    <hr />
+                    <hr/>
                     <Row>
                         <Col>
                             <h4>SubTotal</h4>
@@ -39,6 +40,9 @@ const ShoppingCart = ({ products, tipTotal, setTipTotal }) => {
                             <h4>{getPriceSum(products, tipTotal).toFixed(2)}</h4>
                         </Col>
                     </Row>
+                    <Button className="orderButton" onClick={saveOrder}>
+                        Order!
+                    </Button>
                 </div>
             </Container>
         </div>
