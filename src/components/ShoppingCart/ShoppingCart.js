@@ -47,7 +47,7 @@ const ShoppingCart = ({ products, tipTotal, setTipTotal }) => {
 
 export default ShoppingCart;
 
-function getPriceSum(products, tipTotal) {
+export function getPriceSum(products, tipTotal) {
     let total = 0;
     for (let i = 0; i < products.length; i++) {
         total += parseFloat(products[i].price);
@@ -55,7 +55,7 @@ function getPriceSum(products, tipTotal) {
     return total + Number(tipTotal);
 }
 
-function getPriceSubSum(products) {
+export function getPriceSubSum(products) {
     let total = 0;
     for (let i = 0; i < products.length; i++) {
         total += parseFloat(products[i].price);
