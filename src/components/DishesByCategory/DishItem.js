@@ -4,15 +4,15 @@ import "./DishesByCategory.sass"
 
 const DishItem = ({ dishID, Name, ImageLink, Description }) => {
 
-    const [amount, setAmount] = useState(0);
+    var [amount, setAmount] = useState(0);
     const [ID, setID] = useState(dishID);
     const plusButtonClick = e => {
-        setAmount(amount + 1);
+        setAmount(++amount);
         UpdateSession();
     }
 
     const minusButtonClick = e => {
-        setAmount(amount - 1);
+        setAmount(--amount);
         UpdateSession();
     }
 
