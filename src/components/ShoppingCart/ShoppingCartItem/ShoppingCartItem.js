@@ -20,6 +20,11 @@ const ShoppingCartItem = ({ product }) => {
                     <h5>{product.description}</h5>
                 </Col>
             </Row>
+            <Row>
+                <Col>
+                    <h5>{product.amount}</h5>
+                </Col>
+            </Row>
         </div>
 
     );

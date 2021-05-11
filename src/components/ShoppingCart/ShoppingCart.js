@@ -50,6 +50,18 @@ const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
         fetchDishes().then(r => setDishes(r));
     }, []);
 
+    for(var dish of dishes)
+    {
+        dish.amount = 0;
+        for(var shoppingCartDish of shoppingCartDishes)
+        {
+            if(dish.dishId == shoppingCartDish.id)
+            {
+                dish.amount = shoppingCartDish.amount
+            }
+        }
+    }
+
     products = dishes;
     console.log(dishes);
     return (
