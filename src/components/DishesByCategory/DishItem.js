@@ -4,6 +4,8 @@ import "./DishesByCategory.sass"
 
 const DishItem = ({ dishID, Name, ImageLink, Description }) => {
 
+    let shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
+
     var [amount, setAmount] = useState(0);
     const [ID, setID] = useState(dishID);
     const plusButtonClick = e => {
@@ -16,9 +18,20 @@ const DishItem = ({ dishID, Name, ImageLink, Description }) => {
         UpdateSession();
     }
 
+    if(shoppingCartList != null)
+    {
+        for(var shoppingCartItem of shoppingCartList)
+        {
+            if(shoppingCartItem.id == ID)
+            {
+                amount = shoppingCartItem.amount
+            }
+        }
+    }
+
     function UpdateSession()
     {
-        let shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
+        shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
         var alreadyExists = false;
 
         if(shoppingCartList != null)
