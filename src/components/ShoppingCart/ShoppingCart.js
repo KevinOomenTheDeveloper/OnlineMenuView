@@ -110,7 +110,7 @@ export default ShoppingCart;
 export function getPriceSum(products, tipTotal) {
     let total = 0;
     for (let i = 0; i < products.length; i++) {
-        total += parseFloat(products[i].price);
+        total += parseFloat(products[i].price * products[i].amount);
     }
     return total + Number(tipTotal);
 }
@@ -118,7 +118,7 @@ export function getPriceSum(products, tipTotal) {
 export function getPriceSubSum(products) {
     let total = 0;
     for (let i = 0; i < products.length; i++) {
-        total += parseFloat(products[i].price);
+        total += parseFloat(products[i].price * products[i].amount);
     }
     return total;
 }

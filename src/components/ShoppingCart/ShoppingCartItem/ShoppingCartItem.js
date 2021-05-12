@@ -12,7 +12,7 @@ const ShoppingCartItem = ({ product }) => {
                     <h4>{product.name}</h4>
                 </Col>
                 <Col className="price">
-                    <h4>{product.price}</h4>
+                    <h4>{product.price * product.amount}</h4>
                 </Col>
             </Row>
             <Row>
@@ -22,7 +22,7 @@ const ShoppingCartItem = ({ product }) => {
             </Row>
             <Row>
                 <Col>
-                    <h5>{product.amount}</h5>
+                    <h5>{product.amount}x</h5>
                 </Col>
             </Row>
         </div>
