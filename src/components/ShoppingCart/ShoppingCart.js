@@ -29,14 +29,13 @@ const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
         onUseEffect().then()
     }
 
-    let shoppingCartDishes = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
+    let shoppingCartDishes = [];
     var dishIDs = [];
-    console.log(JSON.parse(sessionStorage.getItem("ShoppingCartList")));
+    var shoppingCartData = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
+    if(shoppingCartData != null) shoppingCartDishes = shoppingCartData;
 
-    for(var dish of shoppingCartDishes){
-        dishIDs.push(dish.id);
-    }
-    console.log(dishIDs);
+    for(var dish of shoppingCartDishes) dishIDs.push(dish.id);
+
     const [dishes, setDishes] = useState([]);
     useEffect(() => {
         const fetchDishes = async () => {
@@ -50,6 +49,7 @@ const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
         fetchDishes().then(r => setDishes(r));
     }, []);
 
+    
     for(var dish of dishes)
     {
         dish.amount = 0;
@@ -63,7 +63,6 @@ const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
     }
 
     products = dishes;
-    console.log(dishes);
     return (
         <div className="shoppingcart-wrapper">
             <Container>
