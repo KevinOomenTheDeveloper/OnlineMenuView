@@ -8,7 +8,9 @@ import Tips from "./Tips/Tips";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 
-const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
+const ShoppingCart = () => {
+    var [tipTotal, setTipTotal] = useState(0);
+    var [total, setTotal] = useState(0);
 
     const saveOrder = () => {
 
@@ -29,14 +31,13 @@ const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
         onUseEffect().then()
     }
 
-    let shoppingCartDishes = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
+    let shoppingCartDishes = [];
     var dishIDs = [];
-    console.log(JSON.parse(sessionStorage.getItem("ShoppingCartList")));
+    var shoppingCartData = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
+    if(shoppingCartData != null) shoppingCartDishes = shoppingCartData;
 
-    for(var dish of shoppingCartDishes){
-        dishIDs.push(dish.id);
-    }
-    console.log(dishIDs);
+    for(var dish of shoppingCartDishes) dishIDs.push(dish.id);
+
     const [dishes, setDishes] = useState([]);
     useEffect(() => {
         const fetchDishes = async () => {
@@ -50,6 +51,7 @@ const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
         fetchDishes().then(r => setDishes(r));
     }, []);
 
+    
     for(var dish of dishes)
     {
         dish.amount = 0;
@@ -61,14 +63,11 @@ const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
             }
         }
     }
-
-    products = dishes;
-    console.log(dishes);
     return (
         <div className="shoppingcart-wrapper">
             <Container>
-                {products.map((product) => (
-                    <ShoppingCartItem product={product}/>
+                {dishes.map((dish) => (
+                    <ShoppingCartItem dish={dish}/>
                 ))}
                 <div>
                     <hr/>
@@ -77,7 +76,7 @@ const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
                             <h4>SubTotal</h4>
                         </Col>
                         <Col className="price">
-                            <h4>{getPriceSubSum(products).toFixed(2)}</h4>
+                            <h4>{getPriceSubSum(dishes).toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Row>
@@ -93,7 +92,7 @@ const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
                             <h4>Total</h4>
                         </Col>
                         <Col className="price">
-                            <h4>{getPriceSum(products, tipTotal).toFixed(2)}</h4>
+                            <h4>{getPriceSum(dishes, tipTotal).toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Button className="orderButton" onClick={saveOrder}>
@@ -107,18 +106,28 @@ const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
 
 export default ShoppingCart;
 
-export function getPriceSum(products, tipTotal) {
+export function getPriceSum(dishes, tipTotal) {
+    
     let total = 0;
-    for (let i = 0; i < products.length; i++) {
-        total += parseFloat(products[i].price * products[i].amount);
+    for(var dish of dishes)
+    {
+        console.log("price and amount:" + dish.price, dish.amount)
+        total += parseFloat(dish.price * dish.amount);
     }
+    console.log("total:" + total);
     return total + Number(tipTotal);
 }
 
-export function getPriceSubSum(products) {
+export function getPriceSubSum(dishes) {
     let total = 0;
-    for (let i = 0; i < products.length; i++) {
-        total += parseFloat(products[i].price * products[i].amount);
+    for(var dish of dishes)
+    {
+        total += parseFloat(dish.price * dish.amount);
     }
     return total;
+}
+
+export function amountChanged()
+{
+    
 }
