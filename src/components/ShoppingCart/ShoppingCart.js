@@ -55,9 +55,9 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
         fetchDishes().then(r => setDishes(r));
     }, []);
 
-    for (var dish of dishes) {
+    for (let dish of dishes) {
         dish.amount = 0;
-        for (var shoppingCartDish of shoppingCartDishes) {
+        for (let shoppingCartDish of shoppingCartDishes) {
             if (dish.dishId === shoppingCartDish.dishId) {
                 dish.amount = shoppingCartDish.amount
             }
