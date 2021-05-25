@@ -11,13 +11,24 @@ const DishesByCategory = () => {
     const categoryName = window.location.pathname.split("/").pop()
     const [dishes, setDishes] = useState([]);
 
-       useEffect(() => {
+    useEffect(() => {
         const fetchCategoryByName = async () => {
             const result = await axios(DISHES_BY_CATEGORY_NAME + categoryName);
             return result.data;
         }
         fetchCategoryByName().then(r => setDishes(r))
     }, []);
+
+    function findAmount(dishId){
+        let shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
+        console.log(shoppingCartList)
+        if (shoppingCartList == null)
+            return 0;
+        const dish = shoppingCartList.find(x => x.dishId === dishId)
+        if (dish != null)
+            return dish.amount
+        else return 0;
+    }
 
     return (
         <Container>
@@ -29,6 +40,7 @@ const DishesByCategory = () => {
                             Name={Dish.name}
                             ImageLink={Dish.imageUrl}
                             Description={Dish.description}
+                            Amount = {findAmount(Dish.dishId)}
                         />
                     </Col>
                 ))}

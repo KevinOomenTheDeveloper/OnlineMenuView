@@ -10,7 +10,7 @@ import "./App.sass"
 function App() {
     const [tipTotal, setTipTotal] = useState(0);
 
-    const [products, setItems] = useState([
+    const [products] = useState([
         {
             id: 1,
             name: "Tomato Soup",

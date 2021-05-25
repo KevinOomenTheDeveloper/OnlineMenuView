@@ -13,35 +13,33 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
     const [dishes, setDishes] = useState([]);
 
     let shoppingCartDishes = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
+
     let dishIDs = [];
-    for(let dish of shoppingCartDishes){
-        dishIDs.push(dish.id);
+    if (shoppingCartDishes != null){
+        for(let dish of shoppingCartDishes){
+            dishIDs.push(dish.dishId);
+        }
     }
 
     const saveOrder = () => {
         async function onUseEffect() {
-
-            const headers = { 'Content-Type': 'text/plain' };
-
             const order = {
                 tableId: 1,
-        }
+                orderStatus: "ToDo",
+                totalPrice: 10.00,
+                tip: 1.00,
+                dateTime: new Date()
+            }
 
-            //DATA
-            //Current Datetime
-            //Order Status = ToDo (backend)
-            //TableId = 1 (backend)
-            //Get Tip
-            //Get Total Price
-
-
+            const orderDto = {
+                foodOrder: order,
+                orderLines: shoppingCartDishes
+            }
 
             await axios.post(
-                'http://localhost:9191/orders/create', order,
-                {headers}
-            ).then(response => {
-                console.log(response.data);
-            })
+                'http://localhost:9191/orders/create', orderDto,
+            ).then(r =>
+                console.log(r.data));
         }
         onUseEffect().then()
     }
@@ -64,7 +62,7 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
         dish.amount = 0;
         for(var shoppingCartDish of shoppingCartDishes)
         {
-            if(dish.dishId == shoppingCartDish.id)
+            if(dish.dishId === shoppingCartDish.dishId)
             {
                 dish.amount = shoppingCartDish.amount
             }
