@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import ShoppingCart, { GetPriceSubtotal, getPriceTotal } from './ShoppingCart'
+import ShoppingCart, { GetPriceSubtotal, GetPriceTotal } from './ShoppingCart'
 
 const products = [
     {
@@ -43,6 +43,6 @@ test('Sum SubPrice', () => {
 test('Sum Price', () => {
     const tip = 1;
 
-    var Price = getPriceTotal(products, tip);
+    var Price = GetPriceTotal(products, tip);
     expect(Price).toBe(17.5);
 })

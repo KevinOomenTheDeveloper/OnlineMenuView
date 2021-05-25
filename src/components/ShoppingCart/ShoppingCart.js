@@ -26,8 +26,8 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
             const order = {
                 tableId: 1,
                 orderStatus: "ToDo",
-                totalPrice: 10.00,
-                tip: 1.00,
+                totalPrice: GetPriceTotal(dishes, tipTotal),
+                tip: tipTotal,
                 dateTime: new Date()
             }
 
@@ -43,8 +43,6 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
         }
         onUseEffect().then()
     }
-
-
 
     useEffect(() => {
         const fetchDishes = async () => {
@@ -98,7 +96,7 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
                             <h4>Total</h4>
                         </Col>
                         <Col className="price">
-                            <h4>{getPriceTotal(dishes, tipTotal).toFixed(2)}</h4>
+                            <h4>{GetPriceTotal(dishes, tipTotal).toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Button className="orderButton" onClick={saveOrder}>
@@ -112,12 +110,8 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
 
 export default ShoppingCart;
 
-export function getPriceTotal(products, tipTotal) {
-    let total = 0;
-    for (let i = 0; i < products.length; i++) {
-        total += parseFloat(products[i].price * products[i].amount);
-    }
-    return total + Number(tipTotal);
+export function GetPriceTotal(products, tipTotal) {
+    return GetPriceSubtotal(products) + Number(tipTotal);
 }
 
 export function GetPriceSubtotal(products) {
