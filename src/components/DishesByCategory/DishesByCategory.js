@@ -21,7 +21,6 @@ const DishesByCategory = () => {
 
     function findAmount(dishId){
         let shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
-        console.log(shoppingCartList)
         if (shoppingCartList == null)
             return 0;
         const dish = shoppingCartList.find(x => x.dishId === dishId)
