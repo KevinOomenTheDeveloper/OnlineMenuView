@@ -8,43 +8,52 @@ import Tips from "./Tips/Tips";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 
-const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
+const ShoppingCart = ({tipTotal, setTipTotal}) => {
+
+    const [dishes, setDishes] = useState([]);
+
+    let shoppingCartDishes = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
+    let dishIDs = [];
+    for(let dish of shoppingCartDishes){
+        dishIDs.push(dish.id);
+    }
 
     const saveOrder = () => {
-
-
         async function onUseEffect() {
 
-            const headers = {
-                'Content-Type': 'text/plain'
-            };
+            const headers = { 'Content-Type': 'text/plain' };
+
+            const order = {
+                tableId: 1,
+        }
+
+            //DATA
+            //Current Datetime
+            //Order Status = ToDo (backend)
+            //TableId = 1 (backend)
+            //Get Tip
+            //Get Total Price
+
+
 
             await axios.post(
-                'http://localhost:9191/orders/create',
+                'http://localhost:9191/orders/create', order,
                 {headers}
             ).then(response => {
-                console.log("Success ========>", response);
+                console.log(response.data);
             })
         }
         onUseEffect().then()
     }
 
-    let shoppingCartDishes = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
-    var dishIDs = [];
-    console.log(JSON.parse(sessionStorage.getItem("ShoppingCartList")));
 
-    for(var dish of shoppingCartDishes){
-        dishIDs.push(dish.id);
-    }
-    console.log(dishIDs);
-    const [dishes, setDishes] = useState([]);
+
     useEffect(() => {
         const fetchDishes = async () => {
             const result = await axios.post(
                 'http://localhost:9191/menu/dishes/all-in-shopping-cart',
                 dishIDs
             );
-            console.log(result.data)
             return result.data;
         }
         fetchDishes().then(r => setDishes(r));
@@ -62,12 +71,10 @@ const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
         }
     }
 
-    products = dishes;
-    console.log(dishes);
     return (
         <div className="shoppingcart-wrapper">
             <Container>
-                {products.map((product) => (
+                {dishes.map((product) => (
                     <ShoppingCartItem product={product}/>
                 ))}
                 <div>
@@ -77,7 +84,7 @@ const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
                             <h4>SubTotal</h4>
                         </Col>
                         <Col className="price">
-                            <h4>{getPriceSubSum(products).toFixed(2)}</h4>
+                            <h4>{GetPriceSubtotal(dishes).toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Row>
@@ -93,7 +100,7 @@ const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
                             <h4>Total</h4>
                         </Col>
                         <Col className="price">
-                            <h4>{getPriceSum(products, tipTotal).toFixed(2)}</h4>
+                            <h4>{getPriceTotal(dishes, tipTotal).toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Button className="orderButton" onClick={saveOrder}>
@@ -107,7 +114,7 @@ const ShoppingCart = ({products, tipTotal, setTipTotal}) => {
 
 export default ShoppingCart;
 
-export function getPriceSum(products, tipTotal) {
+export function getPriceTotal(products, tipTotal) {
     let total = 0;
     for (let i = 0; i < products.length; i++) {
         total += parseFloat(products[i].price * products[i].amount);
@@ -115,7 +122,7 @@ export function getPriceSum(products, tipTotal) {
     return total + Number(tipTotal);
 }
 
-export function getPriceSubSum(products) {
+export function GetPriceSubtotal(products) {
     let total = 0;
     for (let i = 0; i < products.length; i++) {
         total += parseFloat(products[i].price * products[i].amount);
