@@ -67,8 +67,8 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
     return (
         <div className="shoppingcart-wrapper">
             <Container>
-                {dishes.map((product) => (
-                    <ShoppingCartItem product={product}/>
+                {dishes.map((dish) => (
+                    <ShoppingCartItem dish={dish}/>
                 ))}
                 <div>
                     <hr/>
