@@ -1,5 +1,4 @@
 export const plusButtonClick = (amount, id) => {
-    console.log("Amount: " + amount + " ID:" + id)
     ++amount;
     UpdateSession(amount, id);
     return amount;
@@ -13,7 +12,6 @@ export const minusButtonClick = (amount, id) => {
 
 function UpdateSession(amount, id)
 {
-    console.log("Amount: " + amount + " ID:" + id)
     let shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
     var alreadyExists = false;
 
@@ -21,7 +19,7 @@ function UpdateSession(amount, id)
     {
         for(var shoppingCartItem of shoppingCartList)
         {
-            if(shoppingCartItem.id == id)
+            if(shoppingCartItem.dishId == id)
             {
                 shoppingCartItem.amount = amount;
                 alreadyExists = true;
@@ -30,8 +28,7 @@ function UpdateSession(amount, id)
 
         if(!alreadyExists)
         {
-            shoppingCartList.push({id: id, amount: 1});
-            alreadyExists = true;
+            shoppingCartList.push({dishId: id, amount: 1});
         }
     }
 
@@ -39,7 +36,7 @@ function UpdateSession(amount, id)
     {
         if(!alreadyExists)
         {
-            shoppingCartList = [{id: id, amount: 1}];
+            shoppingCartList = [{dishId: id, amount: 1}];
         }
     }
 

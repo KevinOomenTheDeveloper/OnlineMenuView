@@ -44,6 +44,7 @@
     ]
   },
   "devDependencies": {
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "use-state-with-callback": "^2.0.3"
   }
 }

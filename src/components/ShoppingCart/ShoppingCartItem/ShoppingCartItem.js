@@ -5,8 +5,7 @@ import {minusButtonClick, plusButtonClick} from '../../managers/AmountManager'
 
 const ShoppingCartItem = ({ dish }) => {
 
-    var [amount, setAmount] = useState(dish.amount);
-    console.log("product ID:" + dish.dishId);
+    const [amount, setAmount] = useState(dish.amount);
 
     function renderCartItem()
     {
@@ -41,11 +40,6 @@ const ShoppingCartItem = ({ dish }) => {
                 </div>
             );
         }
-        else
-        {
-            return <div></div>;
-        }
-        
     }
 
     return (
