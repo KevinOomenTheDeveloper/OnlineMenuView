@@ -30,8 +30,8 @@ const ShoppingCartItem = ({ dish }) => {
                     <Row>
                         <div className="shoppingcartitem-button-wrapper">
                             <h5 className="dish-amount">{amount}</h5>
-                            <Button className="shoppingcartitem-button" onClick={() => setAmount(plusButtonClick(amount, dish.dishId))}>+</Button>
                             <Button className="shoppingcartitem-button" onClick={() => setAmount(minusButtonClick(amount, dish.dishId))}>-</Button>
+                            <Button className="shoppingcartitem-button" onClick={() => setAmount(plusButtonClick(amount, dish.dishId))}>+</Button>
                         </div>
 
                     </Row>
