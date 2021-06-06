@@ -32,6 +32,8 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
                 dateTime: new Date()
             }
 
+            console.log(new Date())
+
             const orderDto = {
                 foodOrder: order,
                 orderLines: shoppingCartDishes

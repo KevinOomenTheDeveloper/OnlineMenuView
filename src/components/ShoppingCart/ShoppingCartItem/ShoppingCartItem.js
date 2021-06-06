@@ -28,14 +28,12 @@ const ShoppingCartItem = ({ dish }) => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
-                            <h5>{amount}x</h5>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Button className="minus-button" onClick={() => setAmount(minusButtonClick(amount, dish.dishId))}>-</Button>
-                        <h5 className="dish-amount">{amount}</h5>
-                        <Button className="plus-button" onClick={() => setAmount(plusButtonClick(amount, dish.dishId))}>+</Button>
+                        <div className="shoppingcartitem-button-wrapper">
+                            <h5 className="dish-amount">{amount}</h5>
+                            <Button className="shoppingcartitem-button" onClick={() => setAmount(plusButtonClick(amount, dish.dishId))}>+</Button>
+                            <Button className="shoppingcartitem-button" onClick={() => setAmount(minusButtonClick(amount, dish.dishId))}>-</Button>
+                        </div>
+
                     </Row>
                 </div>
             );
