@@ -8,25 +8,13 @@ import Tips from "./Tips/Tips";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {updateSession} from "../DishesByCategory/DishItem"
 
 const ShoppingCart = ({tipTotal, setTipTotal}) => {
 
     const [dishes, setDishes] = useState([]);
-    const [priceTotal, setPriceTotal] = useState(0);
-    const [priceSubTotal, setPriceSubTotal] = useState(0);
 
     let shoppingCartDishes = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
-
-
-    //Retrieve amount of Dish from Local Storage
-    for (let dish of dishes) {
-        dish.amount = 0;
-        for (let shoppingCartDish of shoppingCartDishes) {
-            if (dish.dishId === shoppingCartDish.dishId) {
-                dish.amount = shoppingCartDish.amount
-            }
-        }
-    }
 
     //Get Information about dishes in shopping cart (name, price etc)
     useEffect(() => {
@@ -38,35 +26,33 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
             return result.data;
         }
         fetchDishes().then(r => setDishes(r));
-        GetPriceTotal(dishes, tipTotal);
+        getPriceTotal(dishes, tipTotal);
     }, []);
 
-
-    function GetPriceTotal(products, tipTotal) {
-        setPriceTotal(GetPriceSubTotal(products) + Number(tipTotal));
-    }
-
-    function GetPriceSubTotal(products) {
-        let total = 0;
-        for (let i = 0; i < products.length; i++) {
-            total += parseFloat(products[i].price * products[i].amount);
+    //Retrieve amount of Dish from Local Storage
+    for (let dish of dishes) {
+        dish.amount = 0;
+        for (let shoppingCartDish of shoppingCartDishes) {
+            if (dish.dishId === shoppingCartDish.dishId) {
+                dish.amount = shoppingCartDish.amount
+            }
         }
-        setPriceSubTotal(total);
-        return total;
+    }
+
+    const changeAmount = (index, dishId, amount) => {
+        updateSession(dishId, amount)
+        dishes[index].amount = amount
+        setDishes([...dishes])
     }
 
 
-    const changeAmount = () => {
-        GetPriceTotal(dishes, tipTotal)
-        GetPriceSubTotal(dishes)
-    }
-
+    //Complete Order & Save to DB
     const saveOrder = () => {
         async function onSaveOrder() {
             const order = {
                 tableId: 1,
                 orderStatus: "ToDo",
-                totalPrice: GetPriceTotal(dishes, tipTotal),
+                totalPrice: getPriceTotal(dishes, tipTotal),
                 tip: tipTotal,
                 dateTime: new Date()
             }
@@ -78,8 +64,7 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
             await axios.post('http://localhost:9191/orders/create', orderDto,
             ).then();
         }
-
-        onSaveOrder().then(r => clearLocalStorage())
+        onSaveOrder().then(() => clearLocalStorage())
     }
 
 
@@ -96,15 +81,15 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
                             <h4>SubTotal</h4>
                         </Col>
                         <Col className="price">
-                            <h4>{priceSubTotal.toFixed(2)}</h4>
+                            <h4>{getPriceSubTotal(dishes).toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <Tips setTipTotal={setTipTotal}></Tips>
+                            <Tips setTipTotal={setTipTotal}/>
                         </Col>
                         <Col className="price">
-                            <h4>{tipTotal}</h4>
+                            <h4>{parseFloat(tipTotal).toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Row>
@@ -112,7 +97,7 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
                             <h4>Total</h4>
                         </Col>
                         <Col className="price">
-                            <h4>{priceTotal.toFixed(2)}</h4>
+                            <h4>{getPriceTotal(dishes, tipTotal).toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Link to="/checkout">
@@ -142,4 +127,16 @@ function getDishIds(shoppingCartDishes){
         }
     }
     return dishIDs;
+}
+
+function getPriceTotal(dishes, tipTotal) {
+    return getPriceSubTotal(dishes) + Number(tipTotal);
+}
+
+function getPriceSubTotal(dishes) {
+    let total = 0;
+    for (let i = 0; i < dishes.length; i++) {
+        total = total + parseFloat(dishes[i].price * dishes[i].amount);
+    }
+    return total;
 }

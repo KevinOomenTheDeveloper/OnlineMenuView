@@ -46,10 +46,10 @@ function App() {
                     </Layout>
                 </Route>
                 <Route exact path='/categories'>
-                <Layout title="Categories">
-                    <Categories products={products}/>
-                </Layout>
-            </Route>
+                    <Layout title="Categories">
+                        <Categories products={products}/>
+                    </Layout>
+                </Route>
                 <Route exact path="/checkout">
                     <Layout title="Shopping Cart">
                         <ShoppingCart

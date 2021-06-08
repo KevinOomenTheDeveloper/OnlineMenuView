@@ -5,34 +5,11 @@ import './ShoppingCartItem.sass'
 const ShoppingCartItem = ({ dish, changeAmount, index}) => {
 
     const plusButtonClick = () => {
-        changeAmount(index, dish.amount);
-        UpdateSession(dish.dishId, dish.amount + 1)
+        changeAmount(index, dish.dishId, dish.amount + 1);
     }
 
     const minusButtonClick = () => {
-        changeAmount(index, dish.amount);
-        UpdateSession(dish.dishId, dish.amount - 1)
-    }
-
-
-
-    function UpdateSession(dishID, amount) {
-        console.log("Update Session")
-        let shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
-
-        if (shoppingCartList != null) {
-            const dish = shoppingCartList.find(x => x.dishId === dishID)
-            if (dish != null) {
-                dish.amount = amount
-            } else {
-                shoppingCartList.push({dishId: dishID, amount: amount});
-            }
-        } else {
-            shoppingCartList = [{dishId: dishID, amount: amount}];
-        }
-
-        shoppingCartList = shoppingCartList.filter(i => i.amount > 0);
-        sessionStorage.setItem("ShoppingCartList", JSON.stringify(shoppingCartList));
+        changeAmount(index, dish.dishId, dish.amount - 1);
     }
 
     function renderCartItem()
@@ -45,7 +22,7 @@ const ShoppingCartItem = ({ dish, changeAmount, index}) => {
                         <h4>{dish.name}</h4>
                     </Col>
                     <Col className="price">
-                        <h4>{dish.price * dish.amount}</h4>
+                        <h4>{(dish.price * dish.amount).toFixed(2)}</h4>
                     </Col>
                 </Row>
                 <Row>
