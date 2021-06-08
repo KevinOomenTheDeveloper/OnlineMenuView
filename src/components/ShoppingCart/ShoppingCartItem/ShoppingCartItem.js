@@ -2,23 +2,21 @@ import React, {useState, useEffect} from 'react';
 import {Row, Col, Button} from "react-bootstrap";
 import './ShoppingCartItem.sass'
 
-const ShoppingCartItem = ({ dish, DishID, dishAmount, changeAmount, index}) => {
+const ShoppingCartItem = ({ dish, changeAmount, index}) => {
 
-    const [amount, setAmount] = useState(dishAmount);
+    const [amount, setAmount] = useState(dish.amount);
 
     const plusButtonClick = () => {
         setAmount(amount + 1);
-        console.log(amount)
     }
     
     const minusButtonClick = () => {
         setAmount(amount - 1);
-        console.log(amount)
     }
 
     useEffect(() => {
         //call function when something change in state
-        UpdateSession(DishID, amount);
+        UpdateSession(dish.dishId, amount);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[amount]) //dependency added
 

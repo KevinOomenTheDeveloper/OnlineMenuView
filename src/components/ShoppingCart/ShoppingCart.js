@@ -110,7 +110,7 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
 
         console.log(dishes.filter((i) =>{return i.amount > 0}));
         setDishes(dishes.filter((i) =>{return i.amount > 0}));
-        
+
     }
 
     const onButtonClick = (dishId, amount) => {
@@ -137,7 +137,7 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
         <div className="shoppingcart-wrapper">
             <Container>
                 {dishes.map((dish, i) => (
-                    <ShoppingCartItem dish={dish} DishID={dish.dishId} dishAmount={dish.amount} changeAmount={changeAmount} index={i}/>
+                    <ShoppingCartItem dish={dish} changeAmount={changeAmount} index={i}/>
                 ))}
                 <div>
                     <hr/>
