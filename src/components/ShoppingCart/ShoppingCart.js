@@ -42,7 +42,7 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
     const changeAmount = (index, dishId, amount) => {
         updateSession(dishId, amount)
         dishes[index].amount = amount
-        setDishes([...dishes])
+        setDishes(dishes.filter(dish => dish.amount > 0));
     }
 
 
