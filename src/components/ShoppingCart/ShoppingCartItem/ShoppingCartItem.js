@@ -3,29 +3,25 @@ import {Row, Col, Button} from "react-bootstrap";
 import './ShoppingCartItem.sass'
 //import {minusButtonClick, plusButtonClick} from '../../managers/AmountManager'
 
-const ShoppingCartItem = ({ dish, onButtonClick}) => {
+const ShoppingCartItem = ({ dish, onButtonClick, changeAmount, index}) => {
 
-    const [amount, setAmount] = useState(dish.amount);
-
-    const buttonClick = (amount) =>
+    /*const buttonClick = (amount) =>
     {
         setAmount(amount);
-    }
+    }*/
 
     useEffect(() => {
         //call function when something change in state
-        onButtonClick(dish.dishId, amount);
+        onButtonClick(dish.dishId, dish.amount);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[amount]) 
+    },[dish.amount]) 
 
-    const plusButtonClick = (amount) => {
-        setAmount(++amount);
-        return amount;
+    const plusButtonClick = () => {
+        changeAmount(index, ++dish.amount);
     }
     
-    const minusButtonClick = (amount) => {
-        setAmount(--amount);
-        return amount;
+    const minusButtonClick = () => {
+        changeAmount(index, --dish.amount);
     }
     
 
@@ -39,7 +35,7 @@ const ShoppingCartItem = ({ dish, onButtonClick}) => {
                         <h4>{dish.name}</h4>
                     </Col>
                     <Col className="price">
-                        <h4>{dish.price * amount}</h4>
+                        <h4>{dish.price * dish.amount}</h4>
                     </Col>
                 </Row>
                 <Row>
@@ -49,8 +45,9 @@ const ShoppingCartItem = ({ dish, onButtonClick}) => {
                 </Row>
                 <Row>
                     <div className="shoppingcartitem-button-wrapper">
-                        <Button className="shoppingcartitem-button" onClick={() => buttonClick(minusButtonClick(amount, dish.dishId))}>-</Button>
-                        <Button className="shoppingcartitem-button" onClick={() => buttonClick(plusButtonClick(amount, dish.dishId))}>+</Button>
+                        <h5 className="dish-amount">{dish.amount}</h5>
+                        <Button className="shoppingcartitem-button" onClick={() => minusButtonClick()}>-</Button>
+                        <Button className="shoppingcartitem-button" onClick={() => plusButtonClick()}>+</Button>
                     </div>
 
                 </Row>

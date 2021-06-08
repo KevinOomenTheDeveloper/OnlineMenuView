@@ -107,22 +107,31 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
         if (dish != null) {
             dish.amount = amount
         }
-        console.log(dishes.filter(i => i.amount > 0));
-        const tempDishes = dishes.filter(i => i.amount > 0);
-        setDishes(tempDishes);
-        console.log(dishes);
+
+        console.log(dishes.filter((i) =>{return i.amount > 0}));
+        setDishes(dishes.filter((i) =>{return i.amount > 0}));
+        
     }
 
     const onButtonClick = (dishId, amount) => {
         UpdateSession(dishId, amount);
+        
         GetPriceTotal(dishes, tipTotal);
+        console.log(dishes);
     }
+
+    const changeAmount = (index, value) => {
+        console.log(index, value);
+        dishes[index].amount = parseInt(value);
+        console.log(dishes[index]);
+        setDishes([...dishes])
+}
 
     return (
         <div className="shoppingcart-wrapper">
             <Container>
-                {dishes.map((dish) => (
-                    <ShoppingCartItem dish={dish} onButtonClick={onButtonClick}/>
+                {dishes.map((dish, i) => (
+                    <ShoppingCartItem dish={dish} onButtonClick={onButtonClick} changeAmount={changeAmount} index={i}/>
                 ))}
                 <div>
                     <hr/>
