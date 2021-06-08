@@ -12,6 +12,8 @@ import {Link} from "react-router-dom";
 const ShoppingCart = ({tipTotal, setTipTotal}) => {
 
     const [dishes, setDishes] = useState([]);
+    const [priceTotal, setPriceTotal] = useState(0);
+    const [priceSubTotal, setPriceSubTotal] = useState(0);
 
     let shoppingCartDishes = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
 
@@ -55,6 +57,9 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
             return result.data;
         }
         fetchDishes().then(r => setDishes(r));
+        console.log(dishes);
+        GetPriceTotal(dishes, tipTotal);
+        
     }, []);
 
     for (let dish of dishes) {
@@ -66,11 +71,58 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
         }
     }
 
+    function GetPriceTotal(products, tipTotal) {
+        //console.log("dishes");
+        setPriceTotal(GetPriceSubTotal(products) + Number(tipTotal));
+    }
+    
+    function GetPriceSubTotal(products) {
+        let total = 0;
+        for (let i = 0; i < products.length; i++) {
+            total += parseFloat(products[i].price * products[i].amount);
+        }
+        setPriceSubTotal(total);
+        return total;
+    }
+
+    //Update Local Storage
+    function UpdateSession(dishID, amount) {
+        let shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
+
+        if (shoppingCartList != null) {
+            let dish = shoppingCartList.find(x => x.dishId === dishID)
+            if (dish != null) {
+                dish.amount = amount
+            } else {
+                shoppingCartList.push({dishId: dishID, amount: amount});
+            }
+        } else {
+            shoppingCartList = [{dishId: dishID, amount: amount}];
+        }
+
+        shoppingCartList = shoppingCartList.filter(i => i.amount > 0);
+        sessionStorage.setItem("ShoppingCartList", JSON.stringify(shoppingCartList));
+
+        let dish = dishes.find(d => d.dishId === dishID);
+        if (dish != null) {
+            dish.amount = amount
+        }
+        console.log(dishes.filter(i => i.amount > 0));
+        const tempDishes = dishes.filter(i => i.amount > 0);
+        setDishes(tempDishes);
+        console.log(dishes);
+    }
+
+    const onButtonClick = (dishId, amount) => {
+        UpdateSession(dishId, amount);
+        GetPriceTotal(dishes, tipTotal);
+    }
+
     return (
         <div className="shoppingcart-wrapper">
             <Container>
                 {dishes.map((dish) => (
-                    <ShoppingCartItem dish={dish}/>
+                    <ShoppingCartItem dish={dish} onButtonClick={onButtonClick}/>
                 ))}
                 <div>
                     <hr/>
@@ -79,7 +131,7 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
                             <h4>SubTotal</h4>
                         </Col>
                         <Col className="price">
-                            <h4>{GetPriceSubtotal(dishes).toFixed(2)}</h4>
+                            <h4>{priceSubTotal.toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Row>
@@ -95,7 +147,7 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
                             <h4>Total</h4>
                         </Col>
                         <Col className="price">
-                            <h4>{GetPriceTotal(dishes, tipTotal).toFixed(2)}</h4>
+                            <h4>{priceTotal.toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Link to="/checkout">
@@ -115,16 +167,4 @@ function clearLocalStorage(){
     sessionStorage.removeItem("ShoppingCartList");
     //Refresh Page
     window.location.reload(false)
-}
-
-export function GetPriceTotal(products, tipTotal) {
-    return GetPriceSubtotal(products) + Number(tipTotal);
-}
-
-export function GetPriceSubtotal(products) {
-    let total = 0;
-    for (let i = 0; i < products.length; i++) {
-        total += parseFloat(products[i].price * products[i].amount);
-    }
-    return total;
 }
