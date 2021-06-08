@@ -13,8 +13,8 @@ const Header = ({ headerTitle }) => {
       <Navbar bg="light" expand="lg">
         <Link to="/">
           <Navbar.Brand>
-            <img src={logo} id="logo"/>
             {headerTitle}
+            <img src={logo} id="logo"/>
           </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
