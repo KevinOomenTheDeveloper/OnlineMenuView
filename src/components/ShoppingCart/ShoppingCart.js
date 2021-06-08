@@ -67,7 +67,6 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
         onSaveOrder().then(() => clearLocalStorage())
     }
 
-
     return (
         <div className="shoppingcart-wrapper">
             <Container>
