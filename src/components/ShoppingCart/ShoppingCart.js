@@ -17,11 +17,48 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
 
     let shoppingCartDishes = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
 
-    let dishIDs = [];
-    if (shoppingCartDishes != null) {
-        for (let dish of shoppingCartDishes) {
-            dishIDs.push(dish.dishId);
+
+    //Retrieve amount of Dish from Local Storage
+    for (let dish of dishes) {
+        dish.amount = 0;
+        for (let shoppingCartDish of shoppingCartDishes) {
+            if (dish.dishId === shoppingCartDish.dishId) {
+                dish.amount = shoppingCartDish.amount
+            }
         }
+    }
+
+    //Get Information about dishes in shopping cart (name, price etc)
+    useEffect(() => {
+        const fetchDishes = async () => {
+            const result = await axios.post(
+                'http://localhost:9191/menu/dishes/all-in-shopping-cart',
+                getDishIds(shoppingCartDishes)
+            );
+            return result.data;
+        }
+        fetchDishes().then(r => setDishes(r));
+        GetPriceTotal(dishes, tipTotal);
+    }, []);
+
+
+    function GetPriceTotal(products, tipTotal) {
+        setPriceTotal(GetPriceSubTotal(products) + Number(tipTotal));
+    }
+
+    function GetPriceSubTotal(products) {
+        let total = 0;
+        for (let i = 0; i < products.length; i++) {
+            total += parseFloat(products[i].price * products[i].amount);
+        }
+        setPriceSubTotal(total);
+        return total;
+    }
+
+
+    const changeAmount = () => {
+        GetPriceTotal(dishes, tipTotal)
+        GetPriceSubTotal(dishes)
     }
 
     const saveOrder = () => {
@@ -33,9 +70,6 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
                 tip: tipTotal,
                 dateTime: new Date()
             }
-
-            console.log(new Date())
-
             const orderDto = {
                 foodOrder: order,
                 orderLines: shoppingCartDishes
@@ -48,90 +82,6 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
         onSaveOrder().then(r => clearLocalStorage())
     }
 
-    useEffect(() => {
-        const fetchDishes = async () => {
-            const result = await axios.post(
-                'http://localhost:9191/menu/dishes/all-in-shopping-cart',
-                dishIDs
-            );
-            return result.data;
-        }
-        fetchDishes().then(r => setDishes(r));
-        console.log(dishes);
-        GetPriceTotal(dishes, tipTotal);
-        
-    }, []);
-
-    for (let dish of dishes) {
-        dish.amount = 0;
-        for (let shoppingCartDish of shoppingCartDishes) {
-            if (dish.dishId === shoppingCartDish.dishId) {
-                dish.amount = shoppingCartDish.amount
-            }
-        }
-    }
-
-    function GetPriceTotal(products, tipTotal) {
-        //console.log("dishes");
-        setPriceTotal(GetPriceSubTotal(products) + Number(tipTotal));
-    }
-    
-    function GetPriceSubTotal(products) {
-        let total = 0;
-        for (let i = 0; i < products.length; i++) {
-            total += parseFloat(products[i].price * products[i].amount);
-        }
-        setPriceSubTotal(total);
-        return total;
-    }
-
-    //Update Local Storage
-    function UpdateSession(dishID, amount) {
-        let shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
-
-        if (shoppingCartList != null) {
-            let dish = shoppingCartList.find(x => x.dishId === dishID)
-            if (dish != null) {
-                dish.amount = amount
-            } else {
-                shoppingCartList.push({dishId: dishID, amount: amount});
-            }
-        } else {
-            shoppingCartList = [{dishId: dishID, amount: amount}];
-        }
-
-        shoppingCartList = shoppingCartList.filter(i => i.amount > 0);
-        sessionStorage.setItem("ShoppingCartList", JSON.stringify(shoppingCartList));
-
-        let dish = dishes.find(d => d.dishId === dishID);
-        if (dish != null) {
-            dish.amount = amount
-        }
-
-        console.log(dishes.filter((i) =>{return i.amount > 0}));
-        setDishes(dishes.filter((i) =>{return i.amount > 0}));
-
-    }
-
-    const onButtonClick = (dishId, amount) => {
-        UpdateSession(dishId, amount);
-
-        GetPriceTotal(dishes, tipTotal);
-        console.log(dishes);
-    }
-
-    const changeAmount = (index, value) => {
-
-        const copy = dishes
-        console.log(dishes[index])
-        console.log(dishes[index].amount)
-        dishes[index].amount = value;
-        console.log(dishes[index])
-        console.log(dishes[index].amount)
-
-
-        setDishes([...copy])
-}
 
     return (
         <div className="shoppingcart-wrapper">
@@ -178,8 +128,18 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
 
 export default ShoppingCart;
 
-function clearLocalStorage(){
+function clearLocalStorage() {
     sessionStorage.removeItem("ShoppingCartList");
     //Refresh Page
     window.location.reload(false)
+}
+
+function getDishIds(shoppingCartDishes){
+    let dishIDs = [];
+    if (shoppingCartDishes != null) {
+        for (let dish of shoppingCartDishes) {
+            dishIDs.push(dish.dishId);
+        }
+    }
+    return dishIDs;
 }

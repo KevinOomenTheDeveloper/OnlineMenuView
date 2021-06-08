@@ -4,21 +4,17 @@ import './ShoppingCartItem.sass'
 
 const ShoppingCartItem = ({ dish, changeAmount, index}) => {
 
-    const [amount, setAmount] = useState(dish.amount);
-
     const plusButtonClick = () => {
-        setAmount(amount + 1);
-    }
-    
-    const minusButtonClick = () => {
-        setAmount(amount - 1);
+        changeAmount(index, dish.amount);
+        UpdateSession(dish.dishId, dish.amount + 1)
     }
 
-    useEffect(() => {
-        //call function when something change in state
-        UpdateSession(dish.dishId, amount);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[amount]) //dependency added
+    const minusButtonClick = () => {
+        changeAmount(index, dish.amount);
+        UpdateSession(dish.dishId, dish.amount - 1)
+    }
+
+
 
     function UpdateSession(dishID, amount) {
         console.log("Update Session")
@@ -49,7 +45,7 @@ const ShoppingCartItem = ({ dish, changeAmount, index}) => {
                         <h4>{dish.name}</h4>
                     </Col>
                     <Col className="price">
-                        <h4>{dish.price * amount}</h4>
+                        <h4>{dish.price * dish.amount}</h4>
                     </Col>
                 </Row>
                 <Row>
@@ -59,7 +55,7 @@ const ShoppingCartItem = ({ dish, changeAmount, index}) => {
                 </Row>
                 <Row>
                     <div className="shoppingcartitem-button-wrapper">
-                        <h5 className="dish-amount">{amount}</h5>
+                        <h5 className="dish-amount">{dish.amount}</h5>
                         <Button className="shoppingcartitem-button" onClick={() => minusButtonClick()}>-</Button>
                         <Button className="shoppingcartitem-button" onClick={() => plusButtonClick()}>+</Button>
                     </div>
