@@ -129,11 +129,11 @@ function getDishIds(shoppingCartDishes){
     return dishIDs;
 }
 
-function getPriceTotal(dishes, tipTotal) {
+export function getPriceTotal(dishes, tipTotal) {
     return getPriceSubTotal(dishes) + Number(tipTotal);
 }
 
-function getPriceSubTotal(dishes) {
+export function getPriceSubTotal(dishes) {
     let total = 0;
     for (let i = 0; i < dishes.length; i++) {
         total = total + parseFloat(dishes[i].price * dishes[i].amount);
