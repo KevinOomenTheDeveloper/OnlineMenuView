@@ -115,23 +115,29 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
 
     const onButtonClick = (dishId, amount) => {
         UpdateSession(dishId, amount);
-        
+
         GetPriceTotal(dishes, tipTotal);
         console.log(dishes);
     }
 
     const changeAmount = (index, value) => {
-        console.log(index, value);
-        dishes[index].amount = parseInt(value);
-        console.log(dishes[index]);
-        setDishes([...dishes])
+
+        const copy = dishes
+        console.log(dishes[index])
+        console.log(dishes[index].amount)
+        dishes[index].amount = value;
+        console.log(dishes[index])
+        console.log(dishes[index].amount)
+
+
+        setDishes([...copy])
 }
 
     return (
         <div className="shoppingcart-wrapper">
             <Container>
                 {dishes.map((dish, i) => (
-                    <ShoppingCartItem dish={dish} onButtonClick={onButtonClick} changeAmount={changeAmount} index={i}/>
+                    <ShoppingCartItem dish={dish} DishID={dish.dishId} dishAmount={dish.amount} changeAmount={changeAmount} index={i}/>
                 ))}
                 <div>
                     <hr/>

@@ -1,29 +1,45 @@
 import React, {useState, useEffect} from 'react';
 import {Row, Col, Button} from "react-bootstrap";
 import './ShoppingCartItem.sass'
-//import {minusButtonClick, plusButtonClick} from '../../managers/AmountManager'
 
-const ShoppingCartItem = ({ dish, onButtonClick, changeAmount, index}) => {
+const ShoppingCartItem = ({ dish, DishID, dishAmount, changeAmount, index}) => {
 
-    /*const buttonClick = (amount) =>
-    {
-        setAmount(amount);
-    }*/
-
-    useEffect(() => {
-        //call function when something change in state
-        onButtonClick(dish.dishId, dish.amount);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[dish.amount]) 
+    const [amount, setAmount] = useState(dishAmount);
 
     const plusButtonClick = () => {
-        changeAmount(index, ++dish.amount);
+        setAmount(amount + 1);
+        console.log(amount)
     }
     
     const minusButtonClick = () => {
-        changeAmount(index, --dish.amount);
+        setAmount(amount - 1);
+        console.log(amount)
     }
-    
+
+    useEffect(() => {
+        //call function when something change in state
+        UpdateSession(DishID, amount);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[amount]) //dependency added
+
+    function UpdateSession(dishID, amount) {
+        console.log("Update Session")
+        let shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
+
+        if (shoppingCartList != null) {
+            const dish = shoppingCartList.find(x => x.dishId === dishID)
+            if (dish != null) {
+                dish.amount = amount
+            } else {
+                shoppingCartList.push({dishId: dishID, amount: amount});
+            }
+        } else {
+            shoppingCartList = [{dishId: dishID, amount: amount}];
+        }
+
+        shoppingCartList = shoppingCartList.filter(i => i.amount > 0);
+        sessionStorage.setItem("ShoppingCartList", JSON.stringify(shoppingCartList));
+    }
 
     function renderCartItem()
     {
@@ -35,7 +51,7 @@ const ShoppingCartItem = ({ dish, onButtonClick, changeAmount, index}) => {
                         <h4>{dish.name}</h4>
                     </Col>
                     <Col className="price">
-                        <h4>{dish.price * dish.amount}</h4>
+                        <h4>{dish.price * amount}</h4>
                     </Col>
                 </Row>
                 <Row>
@@ -45,7 +61,7 @@ const ShoppingCartItem = ({ dish, onButtonClick, changeAmount, index}) => {
                 </Row>
                 <Row>
                     <div className="shoppingcartitem-button-wrapper">
-                        <h5 className="dish-amount">{dish.amount}</h5>
+                        <h5 className="dish-amount">{amount}</h5>
                         <Button className="shoppingcartitem-button" onClick={() => minusButtonClick()}>-</Button>
                         <Button className="shoppingcartitem-button" onClick={() => plusButtonClick()}>+</Button>
                     </div>
