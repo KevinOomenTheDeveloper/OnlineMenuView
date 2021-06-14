@@ -4,8 +4,10 @@ import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Categories from "../Categories/Categories";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState} from "react";
-import DishesByCategory from "../DishesByCategory/DishesByCategory"
-import "./App.sass"
+import DishesByCategory from "../DishesByCategory/DishesByCategory";
+import Table from "../Table/Table"
+import "./App.sass";
+import QRCode from 'qrcode.react';
 
 function App() {
     const [tipTotal, setTipTotal] = useState(0);
@@ -62,6 +64,11 @@ function App() {
                 <Route exact path='/category/**'>
                     <Layout title="Category">
                         <DishesByCategory/>
+                    </Layout>
+                </Route>
+                <Route path="/table/**" >
+                    <Layout>
+                        <Categories products={products}/>
                     </Layout>
                 </Route>
             </Switch>

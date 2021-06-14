@@ -50,7 +50,7 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
     const saveOrder = () => {
         async function onSaveOrder() {
             const order = {
-                tableId: 1,
+                tableId: JSON.parse(sessionStorage.getItem("table")),
                 orderStatus: "ToDo",
                 totalPrice: getPriceTotal(dishes, tipTotal),
                 tip: tipTotal,

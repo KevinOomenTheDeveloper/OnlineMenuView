@@ -9,6 +9,9 @@ const ALL_CATEGORIES = "http://localhost:9191/menu/categories/all";
 
 const Categories = () => {
 
+    let tableNumber = window.location.pathname.split("/").pop();
+    if(isNaN(tableNumber)) tableNumber = 0;
+    sessionStorage.setItem("table", JSON.stringify(tableNumber));
     // get all categories
     const [categories, setCategories] = useState([]);
     useEffect(() => {
