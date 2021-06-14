@@ -4,8 +4,9 @@ import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import Categories from "../Categories/Categories";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState} from "react";
-import DishesByCategory from "../DishesByCategory/DishesByCategory"
-import "./App.sass"
+import DishesByCategory from "../DishesByCategory/DishesByCategory";
+import "./App.sass";
+import QRCode from 'qrcode.react';
 
 function App() {
     const [tipTotal, setTipTotal] = useState(0);
@@ -66,6 +67,10 @@ function App() {
                 </Route>
                 <Route path="/table/**" >
                     {window.location.pathname.split("/").pop()}
+                    <QRCode value="http://localhost/table/1" />
+                    <QRCode value="http://localhost/table/2" />
+                    <QRCode value="http://localhost/table/3" />
+                    <QRCode value="http://localhost/table/4" />
                 </Route>
             </Switch>
         </Router>
