@@ -1,4 +1,3 @@
-import { render, screen } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -9,13 +8,6 @@ test('renders without crashing', () => {
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
-
-// test if element exists
-// test('renders Hello World', () => {
-//   render(<App />);
-//   const textElement = screen.getByText(/Hello World/i);
-//   expect(textElement).toBeInTheDocument();
-// });
 
 // boolean test
 describe('true is truthy and false is falsy', () => {
