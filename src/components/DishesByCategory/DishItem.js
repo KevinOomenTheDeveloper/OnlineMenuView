@@ -15,11 +15,9 @@ const DishItem = ({dishID, Name, ImageLink, Description, Amount}) => {
 
     useEffect(() => {
         //call function when something change in state
-        UpdateSession(dishID, amount);
+        updateSession(dishID, amount);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[amount]) //dependency added
-
-
 
     return (
         <Card>
@@ -36,7 +34,7 @@ const DishItem = ({dishID, Name, ImageLink, Description, Amount}) => {
 }
 
 //Update Local Storage
-function UpdateSession(dishID, amount) {
+export function updateSession(dishID, amount) {
     let shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
 
     if (shoppingCartList != null) {

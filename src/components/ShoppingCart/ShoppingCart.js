@@ -8,6 +8,7 @@ import Tips from "./Tips/Tips";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {updateSession} from "../DishesByCategory/DishItem"
 
 const ShoppingCart = ({tipTotal, setTipTotal}) => {
 
@@ -15,48 +16,20 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
 
     let shoppingCartDishes = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
 
-    let dishIDs = [];
-    if (shoppingCartDishes != null) {
-        for (let dish of shoppingCartDishes) {
-            dishIDs.push(dish.dishId);
-        }
-    }
-
-    const saveOrder = () => {
-        async function onSaveOrder() {
-            const order = {
-                tableId: JSON.parse(sessionStorage.getItem("table")),
-                orderStatus: "ToDo",
-                totalPrice: GetPriceTotal(dishes, tipTotal),
-                tip: tipTotal,
-                dateTime: new Date()
-            }
-
-            console.log(order);
-
-            const orderDto = {
-                foodOrder: order,
-                orderLines: shoppingCartDishes
-            }
-
-            await axios.post('http://localhost:9191/orders/create', orderDto,
-            ).then();
-        }
-
-        onSaveOrder().then(r => clearLocalStorage())
-    }
-
+    //Get Information about dishes in shopping cart (name, price etc)
     useEffect(() => {
         const fetchDishes = async () => {
             const result = await axios.post(
                 'http://localhost:9191/menu/dishes/all-in-shopping-cart',
-                dishIDs
+                getDishIds(shoppingCartDishes)
             );
             return result.data;
         }
         fetchDishes().then(r => setDishes(r));
+        getPriceTotal(dishes, tipTotal);
     }, []);
 
+    //Retrieve amount of Dish from Local Storage
     for (let dish of dishes) {
         dish.amount = 0;
         for (let shoppingCartDish of shoppingCartDishes) {
@@ -66,11 +39,39 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
         }
     }
 
+    const changeAmount = (index, dishId, amount) => {
+        updateSession(dishId, amount)
+        dishes[index].amount = amount
+        setDishes(dishes.filter(dish => dish.amount > 0));
+    }
+
+
+    //Complete Order & Save to DB
+    const saveOrder = () => {
+        async function onSaveOrder() {
+            const order = {
+                tableId: JSON.parse(sessionStorage.getItem("table")),
+                orderStatus: "ToDo",
+                totalPrice: getPriceTotal(dishes, tipTotal),
+                tip: tipTotal,
+                dateTime: new Date()
+            }
+            const orderDto = {
+                foodOrder: order,
+                orderLines: shoppingCartDishes
+            }
+
+            await axios.post('http://localhost:9191/orders/create', orderDto,
+            ).then();
+        }
+        onSaveOrder().then(() => clearLocalStorage())
+    }
+
     return (
         <div className="shoppingcart-wrapper">
             <Container>
-                {dishes.map((dish) => (
-                    <ShoppingCartItem dish={dish}/>
+                {dishes.map((dish, i) => (
+                    <ShoppingCartItem dish={dish} changeAmount={changeAmount} index={i}/>
                 ))}
                 <div>
                     <hr/>
@@ -79,15 +80,15 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
                             <h4>SubTotal</h4>
                         </Col>
                         <Col className="price">
-                            <h4>{GetPriceSubtotal(dishes).toFixed(2)}</h4>
+                            <h4>{getPriceSubTotal(dishes).toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <Tips setTipTotal={setTipTotal}></Tips>
+                            <Tips setTipTotal={setTipTotal}/>
                         </Col>
                         <Col className="price">
-                            <h4>{tipTotal}</h4>
+                            <h4>{parseFloat(tipTotal).toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Row>
@@ -95,7 +96,7 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
                             <h4>Total</h4>
                         </Col>
                         <Col className="price">
-                            <h4>{GetPriceTotal(dishes, tipTotal).toFixed(2)}</h4>
+                            <h4>{getPriceTotal(dishes, tipTotal).toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Link to="/checkout">
@@ -111,20 +112,30 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
 
 export default ShoppingCart;
 
-function clearLocalStorage(){
+function clearLocalStorage() {
     sessionStorage.removeItem("ShoppingCartList");
     //Refresh Page
     window.location.reload(false)
 }
 
-export function GetPriceTotal(products, tipTotal) {
-    return GetPriceSubtotal(products) + Number(tipTotal);
+function getDishIds(shoppingCartDishes){
+    let dishIDs = [];
+    if (shoppingCartDishes != null) {
+        for (let dish of shoppingCartDishes) {
+            dishIDs.push(dish.dishId);
+        }
+    }
+    return dishIDs;
 }
 
-export function GetPriceSubtotal(products) {
+export function getPriceTotal(dishes, tipTotal) {
+    return getPriceSubTotal(dishes) + Number(tipTotal);
+}
+
+export function getPriceSubTotal(dishes) {
     let total = 0;
-    for (let i = 0; i < products.length; i++) {
-        total += parseFloat(products[i].price * products[i].amount);
+    for (let i = 0; i < dishes.length; i++) {
+        total = total + parseFloat(dishes[i].price * dishes[i].amount);
     }
     return total;
 }
