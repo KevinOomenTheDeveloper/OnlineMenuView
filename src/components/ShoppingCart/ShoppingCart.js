@@ -25,14 +25,14 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
     const saveOrder = () => {
         async function onSaveOrder() {
             const order = {
-                tableId: 1,
+                tableId: JSON.parse(sessionStorage.getItem("table")),
                 orderStatus: "ToDo",
                 totalPrice: GetPriceTotal(dishes, tipTotal),
                 tip: tipTotal,
                 dateTime: new Date()
             }
 
-            console.log(new Date())
+            console.log(order);
 
             const orderDto = {
                 foodOrder: order,

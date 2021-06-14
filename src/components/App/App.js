@@ -5,6 +5,7 @@ import Categories from "../Categories/Categories";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState} from "react";
 import DishesByCategory from "../DishesByCategory/DishesByCategory";
+import Table from "../Table/Table"
 import "./App.sass";
 import QRCode from 'qrcode.react';
 
@@ -66,11 +67,9 @@ function App() {
                     </Layout>
                 </Route>
                 <Route path="/table/**" >
-                    {window.location.pathname.split("/").pop()}
-                    <QRCode value="http://localhost/table/1" />
-                    <QRCode value="http://localhost/table/2" />
-                    <QRCode value="http://localhost/table/3" />
-                    <QRCode value="http://localhost/table/4" />
+                    <Layout>
+                        <Categories products={products}/>
+                    </Layout>
                 </Route>
             </Switch>
         </Router>
