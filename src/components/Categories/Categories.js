@@ -8,7 +8,6 @@ const ALL_CATEGORIES = "http://localhost:9191/menu/categories/all";
 
 
 const Categories = () => {
-
     // get all categories
     const [categories, setCategories] = useState([]);
     useEffect(() => {

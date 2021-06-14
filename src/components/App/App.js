@@ -64,6 +64,9 @@ function App() {
                         <DishesByCategory/>
                     </Layout>
                 </Route>
+                <Route path="/table/**" >
+                    {window.location.pathname.split("/").pop()}
+                </Route>
             </Switch>
         </Router>
     );
