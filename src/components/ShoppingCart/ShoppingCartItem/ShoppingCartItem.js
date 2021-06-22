@@ -32,9 +32,9 @@ const ShoppingCartItem = ({ dish, changeAmount, index}) => {
                 </Row>
                 <Row>
                     <div className="shoppingcartitem-button-wrapper">
+                        <Button className="shoppingcartitem-button" id="compensateMin" onClick={() => minusButtonClick()}>-</Button>
                         <h5 className="dish-amount">{dish.amount}</h5>
-                        <Button className="shoppingcartitem-button" onClick={() => minusButtonClick()}>-</Button>
-                        <Button className="shoppingcartitem-button" onClick={() => plusButtonClick()}>+</Button>
+                        <Button className="shoppingcartitem-button" id="compensatePlus" onClick={() => plusButtonClick()}>+</Button>
                     </div>
 
                 </Row>

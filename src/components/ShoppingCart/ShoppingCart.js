@@ -82,6 +82,7 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
                         <Col className="price">
                             <h4>{getPriceSubTotal(dishes).toFixed(2)}</h4>
                         </Col>
+
                     </Row>
                     <Row>
                         <Col>
@@ -91,6 +92,7 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
                             <h4>{parseFloat(tipTotal).toFixed(2)}</h4>
                         </Col>
                     </Row>
+                    <br/>
                     <Row>
                         <Col>
                             <h4>Total</h4>
