@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import DishItem from "./DishItem";
-import {Col, Row} from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/container";
 import axios from "axios";
 
@@ -19,7 +19,7 @@ const DishesByCategory = () => {
         fetchCategoryByName().then(r => setDishes(r))
     }, []);
 
-    function findAmount(dishId){
+    function findAmount(dishId) {
         let shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
         if (shoppingCartList == null)
             return 0;
@@ -32,17 +32,24 @@ const DishesByCategory = () => {
     return (
         <Container>
             <Row>
-                {dishes.map((Dish) => (
-                    <Col className="dishesByCategory-column" sm={4}>
-                        <DishItem
-                            dishID = {Dish.dishId}
-                            Name={Dish.name}
-                            ImageLink={Dish.imageUrl}
-                            Description={Dish.description}
-                            Amount = {findAmount(Dish.dishId)}
-                        />
-                    </Col>
-                ))}
+                {(() => {
+                    if (dishes.length > 0) {
+                        return (dishes.map((Dish) => (
+                            <Col className="dishesByCategory-column" sm={4}>
+                                <DishItem
+                                    dishID={Dish.dishId}
+                                    Name={Dish.name}
+                                    ImageLink={Dish.imageUrl}
+                                    Description={Dish.description}
+                                    Amount={findAmount(Dish.dishId)}
+                                />
+                            </Col>
+                        )));
+                    }
+                    else {
+                        return (<label>Sorry, we didn't find any dish for this category. Please contact the waiter.</label>);
+                    };
+                })()}
             </Row>
         </Container>
     );
