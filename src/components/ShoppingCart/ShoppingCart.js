@@ -100,9 +100,9 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
                         </Col>
                     </Row>
                     <Link to="/checkout">
-                        <Button className="orderButton" onClick={saveOrder}>
+                        <button className="orderButton" onClick={saveOrder}>
                             Order!
-                        </Button>
+                        </button>
                     </Link>
                 </div>
             </Container>
