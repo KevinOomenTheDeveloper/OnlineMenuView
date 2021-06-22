@@ -98,7 +98,7 @@ const ShoppingCart = ({tipTotal, setTipTotal}) => {
                             <h4>Total</h4>
                         </Col>
                         <Col className="price">
-                            <h4>{getPriceTotal(dishes, tipTotal).toFixed(2)}</h4>
+                            <h4>€ {getPriceTotal(dishes, tipTotal).toFixed(2)}</h4>
                         </Col>
                     </Row>
                     <Link to="/checkout">

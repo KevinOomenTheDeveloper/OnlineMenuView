@@ -12,22 +12,30 @@ const Categories = () => {
     let tableNumber = window.location.pathname.split("/").pop();
     if (isNaN(tableNumber)) tableNumber = 0;
     sessionStorage.setItem("table", JSON.stringify(tableNumber));
+
     // get all categories
     const [categories, setCategories] = useState([]);
+    const [emptyCategories, setEmptyCategories] = useState(false);
     useEffect(() => {
         const fetchCategories = async () => {
             const result = await axios(ALL_CATEGORIES);
             console.log(result.data)
             return result.data;
         }
-        fetchCategories().then(r => setCategories(r));
+        fetchCategories().then(r => changeCategories(r));
     }, []);
+
+    const changeCategories = (r) => {
+        setCategories(r)
+        if (r != null && r.length === 0) setEmptyCategories(true)
+        else setEmptyCategories(false)
+    }
 
     return (
         <Container>
             <Row>
                 {(() => {
-                    if (categories.length > 0) {
+                    if (!emptyCategories) {
                         return (categories.map((category) => (
                             <Col className="categories-column" sm={4}>
                                 <CategoriesItem
@@ -39,7 +47,7 @@ const Categories = () => {
                     }
                     else {
                         return (<label>Sorry, we didn't find any category. Please contact the waiter.</label>);
-                    };
+                    }
                 })()}
             </Row>
         </Container>
