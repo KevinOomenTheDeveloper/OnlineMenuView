@@ -10,14 +10,21 @@ const DishesByCategory = () => {
 
     const categoryName = window.location.pathname.split("/").pop()
     const [dishes, setDishes] = useState([]);
+    const [emptyDishes, setEmptyDishes] = useState(false);
 
     useEffect(() => {
         const fetchCategoryByName = async () => {
             const result = await axios(DISHES_BY_CATEGORY_NAME + categoryName);
             return result.data;
         }
-        fetchCategoryByName().then(r => setDishes(r))
+        fetchCategoryByName().then(r => changeDishes(r))
     }, []);
+
+    const changeDishes = (r) => {
+        setDishes(r)
+        if (r != null && r.length === 0) setEmptyDishes(true)
+        else setEmptyDishes(false)
+    }
 
     function findAmount(dishId) {
         let shoppingCartList = JSON.parse(sessionStorage.getItem("ShoppingCartList"));
@@ -30,10 +37,10 @@ const DishesByCategory = () => {
     }
 
     return (
-        <Container>
+        <Container style={{paddingBottom: "15px"}}>
             <Row>
                 {(() => {
-                    if (dishes.length > 0) {
+                    if (!emptyDishes) {
                         return (dishes.map((Dish) => (
                             <Col className="dishesByCategory-column" sm={4}>
                                 <DishItem
@@ -47,8 +54,8 @@ const DishesByCategory = () => {
                         )));
                     }
                     else {
-                        return (<label>Sorry, we didn't find any dish for this category. Please contact the waiter.</label>);
-                    };
+                        return (<label>Sorry, we didn't find any category. Please contact the waiter if you think this is a mistake.</label>);
+                    }
                 })()}
             </Row>
         </Container>

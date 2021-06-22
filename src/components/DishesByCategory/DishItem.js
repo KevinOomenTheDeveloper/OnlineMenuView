@@ -25,9 +25,9 @@ const DishItem = ({dishID, Name, ImageLink, Description, Amount}) => {
             <Card.Img className='card-image' src={ImageLink}/>
             <Card.Body className="card-body">
                 <Card.Text>{Description}</Card.Text>
-                {amount !== 0 && <Button className="minus-button" onClick={minusButtonClick}>-</Button>}
+                {amount !== 0 && <button className="dishitem-button" onClick={minusButtonClick}>-</button>}
                 <Card.Text className="dish-amount">{amount}</Card.Text>
-                <Button className="plus-button" onClick={plusButtonClick}>+</Button>
+                <button className="dishitem-button" onClick={plusButtonClick}>+</button>
             </Card.Body>
         </Card>
     );
