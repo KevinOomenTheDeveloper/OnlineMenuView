@@ -13,7 +13,7 @@ const Header = ({ headerTitle }) => {
       <Navbar className="navbar" expand="lg">
         <Link to="/">
           <Navbar.Brand>
-            <img src={logo} id="logo" />
+            <img src={logo} id="logo" alt="logo" />
             <a className="header-title">
               {headerTitle}
             </a>

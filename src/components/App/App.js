@@ -5,9 +5,7 @@ import Categories from "../Categories/Categories";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState} from "react";
 import DishesByCategory from "../DishesByCategory/DishesByCategory";
-import Table from "../Table/Table"
 import "./App.sass";
-import QRCode from 'qrcode.react';
 
 function App() {
     const [tipTotal, setTipTotal] = useState(0);
