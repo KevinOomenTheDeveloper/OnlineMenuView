@@ -4,7 +4,7 @@ import { Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/container";
 import axios from "axios";
 
-const DISHES_BY_CATEGORY_NAME = "http://localhost:9191/menu/dishes/category/";
+const DISHES_BY_CATEGORY_NAME = "http://localhost:9191/menu/dishes/category-available/";
 
 const DishesByCategory = () => {
 

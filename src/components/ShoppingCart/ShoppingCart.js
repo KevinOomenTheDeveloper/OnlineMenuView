@@ -5,7 +5,6 @@ import Row from "react-bootstrap/row";
 import Col from "react-bootstrap/col";
 import ShoppingCartItem from "./ShoppingCartItem/ShoppingCartItem";
 import Tips from "./Tips/Tips";
-import Button from "react-bootstrap/Button";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import {updateSession} from "../DishesByCategory/DishItem"
